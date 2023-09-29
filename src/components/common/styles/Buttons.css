@@ -1,0 +1,112 @@
+/* ADD TO CART BUTTON */
+#add-to-cart-btn {
+  width: 158px;
+  height: 35px;
+  background-color: #15adb7 !important;
+  border: 0 !important;
+  outline: 0 !important;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+#add-to-cart-btn:hover {
+  background-color: #12919a !important;
+  border: 0 !important;
+  outline: 0 !important;
+  color: #ffffff;
+  font-family: "Poppins" !important;
+}
+
+/* SEE MORE BUTTON */
+
+#see-more-btn {
+  width: 168px;
+  height: 51px;
+  background-color: #c1dcdc !important;
+  border: 0 !important;
+  outline: 0 !important;
+  color: #1e1e1e;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+#see-more-btn:hover {
+  background-color: #9cbbbd !important;
+  border: 0 !important;
+  outline: 0 !important;
+}
+
+/* EXPLORE BUTTON */
+
+#explore-btn {
+  width: 168px;
+  height: 51px;
+  background-color: #ffffff !important;
+  border: 0 !important;
+  outline: 0 !important;
+  color: #1e1e1e;
+  border-radius: 8px;
+  font-size: 15px;
+}
+
+#explore-btn:hover {
+  background-color: #cbcbcb !important;
+  border: 0 !important;
+  outline: 0 !important;
+}
+
+/* QUANTITY ADJUST BUTTON */
+#decrement-quantity-btn,
+#increment-quantity-btn {
+  width: 30px;
+  height: 20px;
+  background-color: #ffffff !important;
+  border: 0 !important;
+  outline: 0 !important;
+  color: #1e1e1e;
+  border-radius: 8px;
+}
+
+#decrement-quantity-btn {
+  margin-right: 13px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+}
+
+#increment-quantity-btn {
+  margin-left: 10px;
+  margin-bottom: 0px;
+  margin-top: 0px;
+  margin-right: 0px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+}
+
+#decrement-quantity-btn:hover,
+#increment-quantity-btn:hover {
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  -webkit-transition: 0.3s ease-in-out;
+  -moz-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  -ms-transition: 0.3s ease-in-out;
+}
+
+.quantity-adjust-btn {
+  width: 120px;
+  height: max-content;
+  padding: 6px;
+  border: #12919a 2px solid;
+  border-radius: 62.07px;
+}

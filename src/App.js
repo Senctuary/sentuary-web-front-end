@@ -1,7 +1,7 @@
 import logo from './assets/images/logo.png';
 import './App.css';
 
-import SeeMoreButton from "./components/common/buttons/SeeMoreButton";
+import QuantityAdjustButton from './components/common/buttons/QuantityAdjustButton';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
-        <SeeMoreButton />
+        <QuantityAdjustButton />
       </header>
     </div>
   );

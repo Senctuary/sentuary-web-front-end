@@ -1,8 +1,8 @@
 import React from "react";
-import "../styles/SeeMoreButton.css";
+import "../styles/Buttons.css";
 import 'font-awesome/css/font-awesome.min.css';
 
-const AddToCartButton = () => {
+const SeeMoreButton = () => {
   return (
     <div>
       <button id="see-more-btn">
@@ -13,4 +13,4 @@ const AddToCartButton = () => {
   );
 };
 
-export default AddToCartButton;
+export default SeeMoreButton;
