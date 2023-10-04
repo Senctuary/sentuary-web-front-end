@@ -1,0 +1,25 @@
+.subHeader-container {
+  display: flex;
+  background: #c1dcdc;
+  padding: 27px 122px;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.progress-bar-container {
+  height: fit-content;
+}
+
+.title {
+  color: #000;
+  font-family: Poppins;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+i {
+  padding: 0 15px;
+}
