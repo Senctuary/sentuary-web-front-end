@@ -11,9 +11,9 @@ const ProductCardOrder = (props) => {
         alt="the plant"
       />
       <div class="informationContainer">
-        <h3 class="name">Natural Plants</h3>
-        <p class="price">₫ 62,000</p>
-        <p class="quantity">Quantity: 220</p>
+        <h3 class="name">{props.name}</h3>
+        <p class="price">{props.price}</p>
+        <p class="quantity">Quantity: {props.quantity}</p>
         <div class="buttonsContainer">
           <ExploreButton title={props.title}></ExploreButton>
           <i className="fa fa-trash" style={{ marginLeft: "0.5rem", color: "#1E1E1E" }}></i>          
