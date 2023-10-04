@@ -2,7 +2,7 @@ import React from "react";
 import ExploreButton from "../buttons/ExploreButton";
 import "../styles/ProductCardOrder.css";
 
-const ProductCardOrder = () => {
+const ProductCardOrder = (props) => {
   return (
     <div class="productCardContainer">
       <img
@@ -15,7 +15,7 @@ const ProductCardOrder = () => {
         <p class="price">₫ 62,000</p>
         <p class="quantity">Quantity: 220</p>
         <div class="buttonsContainer">
-          <ExploreButton title='Edit'></ExploreButton>
+          <ExploreButton title={props.title}></ExploreButton>
           <i className="fa fa-trash" style={{ marginLeft: "0.5rem", color: "#1E1E1E" }}></i>          
         </div>
       </div>
