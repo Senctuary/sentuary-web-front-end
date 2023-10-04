@@ -1,9 +1,13 @@
-import React from 'react'
+import React from "react";
+import { Outlet } from "react-router";
 
 const FirstPage = () => {
   return (
-    <div>FirstPage</div>
-  )
-}
+    <div>
+      <h1>FirstPage</h1>
+      <Outlet />
+    </div>
+  );
+};
 
-export default FirstPage
+export default FirstPage;
