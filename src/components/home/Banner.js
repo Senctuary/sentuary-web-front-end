@@ -19,14 +19,20 @@ const Banner = () => {
                     <p style={{fontSize: "38.4px", margin: "0"}}>100+</p> <br></br>   Customers
                 </span>
             </div> 
+            <div class="search-element">
+                <input className='search-bar' type="text" placeholder="What are you looking for?"/>
+                <button className='search-button'>
+                    <i class="fa fa-search"></i>
+                </button>
+            </div>
         </div>
         <div class="image-element">
             <div class="animated-element">
-                <img style={{ height: "100px", position: "relative", left: "400px", top: "100px"}} src={rightArrow} alt="Image 1"/>
+                <img style={{ height: "100px", position: "relative", left: "200px", top: "100px"}} src={rightArrow} alt="Image 1"/>
             </div>
             <img src={cactusHighlight} alt="Image 1"/>
             <div class="animated-element">
-                <img style={{ height: "100px"}} src={leftArrow} alt="Image 1"/>
+                <img style={{ height: "100px", position: "relative", left: "-200px"}} src={leftArrow} alt="Image 1"/>
             </div>
         </div>
     </div>
