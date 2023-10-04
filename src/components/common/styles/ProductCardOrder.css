@@ -1,0 +1,27 @@
+p,
+h3 {
+  margin: 0;
+}
+
+.productCardContainer {
+  display: inline-flex;
+  padding: 12px 42px 12px 14px;
+  align-items: flex-start;
+  gap: 68px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.informationContainer {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.buttonsContainer {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 28px;
+}
