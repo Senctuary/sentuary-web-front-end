@@ -1,15 +1,24 @@
-import './App.css';
+import logo from "./assets/images/logo.png";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Navigation from './components/common/navigation/Navigation';
+import Navigation from "./components/common/navigation/Navigation";
+import HomeScreen from "./components/screens/HomeScreen";
 import ProductCardOrder from './components/common/productCards/productCardOrder';
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Navigation />
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Navigation />
+        </header>
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
+        </Routes>
+        <footer>Footer content goes here</footer>
+      </div>
+    </Router>
   );
 }
 
