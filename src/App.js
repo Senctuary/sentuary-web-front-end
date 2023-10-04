@@ -1,19 +1,23 @@
-import logo from './assets/images/logo.png';
-import './App.css';
+import logo from "./assets/images/logo.png";
+import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-import Navigation from './components/common/navigation/Navigation';
+import Navigation from "./components/common/navigation/Navigation";
+import HomeScreen from "./components/screens/HomeScreen";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <Navigation />
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <header className="App-header">
+          <Navigation />
+        </header>
+        <Routes>
+          <Route path="/" element={<HomeScreen />} />
+        </Routes>
+        <footer>Footer content goes here</footer>
+      </div>
+    </Router>
   );
 }
 

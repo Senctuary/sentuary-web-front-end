@@ -1,0 +1,43 @@
+.banner {
+    width: 90%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: row;
+    background-color: #C1DCDC;
+    border-radius: 24px;
+}
+
+.text-element {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+}
+
+.intro-element {
+    width: fit-content;
+    display: flex;
+    margin: 0 0 5rem 2rem;
+    justify-content: center;
+    flex-direction: row;
+}
+
+.image-element {
+    display: block;
+    width: 40%;
+}
+
+.animated-element {
+    animation: bounce 2s infinite;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
