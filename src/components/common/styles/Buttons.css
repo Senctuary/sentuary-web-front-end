@@ -40,7 +40,7 @@
 /* EXPLORE BUTTON */
 
 #explore-btn {
-  width: 168px;
+  padding: 0 24px;
   height: 51px;
   background-color: #ffffff !important;
   border: 0 !important;
