@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Navigation.css";
 import "font-awesome/css/font-awesome.min.css";
+import { Link } from "react-router-dom";
 
 const logo = require("../../../assets/images/logo.png");
 
@@ -12,9 +13,9 @@ const Navigation = () => {
       </span>
 
       <span className="center">
-        <a href="/">Home</a>
-        <a href="/products">Products</a>
-        <a href="/about">About</a>
+        <Link to="/">Home</Link>
+        <Link to="/products">Products</Link>
+        <Link to="/about">About</Link>
       </span>
 
       <span className="right">
