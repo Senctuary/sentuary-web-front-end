@@ -1,0 +1,13 @@
+.firstpage-container{
+    /* display: flex; */
+}
+
+.products-container {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.contact-inputs-container {
+  /* width: 50%; */
+}
