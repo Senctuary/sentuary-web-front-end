@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Card.css";
-import AddToCartButton from "../buttons/AddToCartButton";
 
-const Card = () => {
+const CategoryCard = ({title}) => {
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
 
@@ -10,10 +9,10 @@ const Card = () => {
     // Function to fetch a random image from Unsplash
     const fetchRandomImage = async () => {
       try {
-        const topic = "cactus"; // Search query
+        const topic = "plant"; // Search query
 
         const response = await fetch(
-          "https://api.unsplash.com/photos/random?query=cactus&client_id=wc1Xg-SiEPLbjNAGrRXfBvvoXtnLFKNvnH6BgkHr3Pg"
+          `https://api.unsplash.com/photos/random?query=${topic}&client_id=wc1Xg-SiEPLbjNAGrRXfBvvoXtnLFKNvnH6BgkHr3Pg`
         );
         if (!response.ok) {
           throw new Error("Failed to fetch images");
@@ -31,19 +30,17 @@ const Card = () => {
     fetchRandomImage();
   }, []);
   return (
-    <div className="card">
+    <div className="category-card">
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <img className="image" src={image} alt="Random Unsplash Image" />
+        <img className="category-card__image" src={image} alt="Random Unsplash Image" />
       )}
       <div className="card-body">
-        <p className="card-title">Cactus</p>
-        <p className="card-price">$20</p>
-        <AddToCartButton/>
+        <h3 className="card-title" style={{marginTop: "1rem"}}>{title}</h3>
       </div>
     </div>
   );
 };
 
-export default Card;
+export default CategoryCard;
