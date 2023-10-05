@@ -4,7 +4,7 @@ import "font-awesome/css/font-awesome.min.css";
 
 const ExploreButton = (props) => {
   return (
-    <div>
+    <div style={{display: `${props.displayBtn}`}}>
       <button id="explore-btn">
         {props.title}
         <i className={props.rightIcon} style={{ marginLeft: "0.5rem", color: "#1E1E1E" }}></i>

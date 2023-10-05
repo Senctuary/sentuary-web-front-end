@@ -1,13 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
+import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
+import 'primeflex/primeflex.css';                                   // css utility
+import 'primeicons/primeicons.css';
+import 'primereact/resources/primereact.css';                       // core css
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <App />
+    <PrimeReactProvider>
+      <App />
+    </PrimeReactProvider>
   </React.StrictMode>
 );
 

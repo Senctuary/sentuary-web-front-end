@@ -20,12 +20,13 @@ const Navigation = () => {
 
       <span className="right">
         <div className="profile-btn">
-          <button
+          <Link
+          to={"/checkout/contact"}
             className="shopping-cart-btn"
             style={{ margin: "0 10px 5px 15px" }}
           >
             <i className="fa fa-shopping-cart" style={{ color: "#1E1E1E" }}></i>
-          </button>
+          </Link>
 
           <button className="user-btn" style={{ margin: "0 0 5px 15px" }}>
             <i className="fa fa-user" style={{ color: "#1E1E1E" }}></i>

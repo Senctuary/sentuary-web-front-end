@@ -15,7 +15,7 @@ const ProductCardOrder = (props) => {
         <p class="price">{props.price}</p>
         <p class="quantity">Quantity: {props.quantity}</p>
         <div class="buttonsContainer">
-          <ExploreButton title={props.title}></ExploreButton>
+          <ExploreButton displayBtn='none' title={props.title}></ExploreButton>
           <i className="fa fa-trash" style={{ marginLeft: "0.5rem", color: "#1E1E1E" }}></i>          
         </div>
       </div>
