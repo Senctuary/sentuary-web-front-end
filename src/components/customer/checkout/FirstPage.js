@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Outlet } from "react-router";
-import "./FirstPage.css";
+import "./styles/FirstPage.css";
 import SubHeader from "../../common/SubHeader";
 import ProductCardOrder from "../../common/productCards/productCardOrder";
 import { Button } from "primereact/button";

@@ -1,7 +1,7 @@
 import React from "react";
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import "./ContactDetail.css";
+import "./styles/CheckOutDetail.css";
 
 const ContactDetail = () => {
   const initialValues = {
