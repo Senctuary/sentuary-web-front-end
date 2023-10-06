@@ -59,6 +59,7 @@ const PaymentMethod = () => {
                       onChange={() => {
                         setSelectedPaymentMethod(method.id);
                         formik.setFieldValue("paymentMethodId", method.id);
+                        formik.submitForm();
                       }}
                     />
                     {method.name}
@@ -66,7 +67,6 @@ const PaymentMethod = () => {
                 </div>
               ))}
             </div>
-            <button type="submit">Submit</button>
           </form>
         )}
       </Formik>

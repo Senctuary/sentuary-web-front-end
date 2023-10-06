@@ -65,7 +65,7 @@ const FirstPage = () => {
     if (currentRoute.includes("contact")) {
       navigate("/checkout/payment");
     } else if (currentRoute.includes("payment")) {
-      navigate("/checkout/successful");
+      navigate("/successful");
     }
   };
 
