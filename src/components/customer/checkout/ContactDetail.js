@@ -2,25 +2,29 @@ import React from "react";
 import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./styles/CheckOutDetail.css";
+import { useOutletContext } from "react-router-dom";
 
 const ContactDetail = () => {
   const initialValues = {
-    fullName: "",
+    name: "",
     phoneNumber: "",
     address: "",
   };
 
   const validationSchema = Yup.object().shape({
-    fullName: Yup.string().required("Full Name is required"),
+    name: Yup.string().required("Full Name is required"),
     phoneNumber: Yup.string()
       .required("Phone Number is required")
       .matches(/^\d{10}$/, "Phone Number must be 10 digits"),
     address: Yup.string().required("Address is required"),
   });
 
+  const [setContactDetail] = useOutletContext();
+
   const onSubmit = (values) => {
     // You can handle form submission logic here
     console.log("Form Data:", values);
+    setContactDetail(values);
   };
 
   return (
@@ -34,14 +38,14 @@ const ContactDetail = () => {
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <div className="form-group">
-              <label htmlFor="fullName">Full Name</label>
+              <label htmlFor="name">Full Name</label>
               <Field
                 type="text"
-                id="fullName"
-                name="fullName"
+                id="name"
+                name="name"
                 onBlur={() => {
                   if (
-                    formik.values.fullName &&
+                    formik.values.name &&
                     formik.values.phoneNumber &&
                     formik.values.address
                   ) {
@@ -49,7 +53,7 @@ const ContactDetail = () => {
                   }
                 }}
               />
-              <ErrorMessage name="fullName" component="div" className="error" />
+              <ErrorMessage name="name" component="div" className="error" />
             </div>
             <div className="form-group">
               <label htmlFor="phoneNumber">Phone Number</label>
@@ -59,7 +63,7 @@ const ContactDetail = () => {
                 name="phoneNumber"
                 onBlur={() => {
                   if (
-                    formik.values.fullName &&
+                    formik.values.name &&
                     formik.values.phoneNumber &&
                     formik.values.address
                   ) {
@@ -81,7 +85,7 @@ const ContactDetail = () => {
                 name="address"
                 onBlur={() => {
                   if (
-                    formik.values.fullName &&
+                    formik.values.name &&
                     formik.values.phoneNumber &&
                     formik.values.address
                   ) {

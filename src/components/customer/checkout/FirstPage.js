@@ -5,7 +5,8 @@ import SubHeader from "../../common/SubHeader";
 import ProductCardOrder from "../../common/productCards/productCardOrder";
 import { Button } from "primereact/button";
 import { Link, useNavigate } from "react-router-dom";
-
+import axios from "axios";
+const API_DOMAIN = process.env.REACT_APP_API_DOMAIN;
 //Get the cart items from LS or API.
 // Then GET item information from API View a product detail
 
@@ -23,6 +24,7 @@ const FirstPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [productIds, setProductIds] = useState([]);
+  const [requestBody, setRequestBody] = useState({});
   const navigate = useNavigate();
   let itemSample = [
     {
@@ -63,14 +65,50 @@ const FirstPage = () => {
     let currentRoute = window.location.pathname;
     console.log(currentRoute);
     if (currentRoute.includes("contact")) {
-      navigate("/checkout/payment");
+      navigate("/checkout/payment", { state: { requestBody: requestBody } });
     } else if (currentRoute.includes("payment")) {
-      navigate("/successful");
+      let fullRequestBody = localStorage.getItem("fullRequestBody");
+      makeOrder(fullRequestBody)
+        .then(() => {
+          navigate("/successful");
+        })
+        .catch((error) => {
+          // Handle errors here
+          console.error(error);
+        });
     }
   };
 
   const navigateBack = () => {
     navigate(-1);
+  };
+
+  const handleContactData = (data) => {
+    // Do something with the data, such as saving it to the state or performing an action.
+    console.log("Contact data: ", data);
+    let tmp = { ...data, productIds };
+    setRequestBody(tmp);
+    console.log("Half-Request body: ", requestBody);
+  };
+
+  let makeOrder = (body) => {
+    return new Promise((resolve, reject) => {
+      axios
+        .post(`${API_DOMAIN}/order`, body)
+        .then((response) => {
+          if (response.status === 200 || response.status === 201) {
+            console.log("Order was successful:", response.data);
+            resolve(response); // Resolve the promise for a successful order
+          } else {
+            console.log("Order failed with status code:", response.status);
+            reject(new Error("Order failed")); // Reject the promise for a failed order
+          }
+        })
+        .catch((error) => {
+          console.log("Error:", error);
+          reject(error); // Reject the promise for other errors
+        });
+    });
   };
 
   return (
@@ -98,7 +136,7 @@ const FirstPage = () => {
           <h2>{totalPrice}</h2>
         </div>
         <div className="contact-inputs-container col-12 md:col-6">
-          <Outlet />
+          <Outlet context={[handleContactData]} />
         </div>
       </div>
       <div className="buttons-container">

@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from "react";
 import "./styles/PaymentMethod.css";
-import * as Yup from "yup";
 import { ErrorMessage, Field, Formik } from "formik";
 import axios from "axios";
+import { useLocation } from "react-router-dom";
 
 const API_DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 const PaymentMethod = () => {
   let [paymentMethods, setPaymentMethods] = useState([]);
   let [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
+
+  const location = useLocation();
+  const { requestBody } = location.state || {};
 
   let initialValues = {
     paymentMethodId: "",
@@ -35,6 +38,9 @@ const PaymentMethod = () => {
   const onSubmit = (values) => {
     // You can handle form submission logic here
     console.log("Form Data:", values);
+    let fullRequestBody = { ...requestBody, ...values, deliveryOptionsId: "" };
+    console.log("Request Body:", fullRequestBody);
+    localStorage.setItem("fullRequestBody", JSON.stringify(fullRequestBody));
   };
 
   return (
