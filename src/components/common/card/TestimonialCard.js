@@ -9,7 +9,7 @@ const TestimonialCard = () => {
     <div className="frame">
       <div className="overlap">
         <div className="overlap-group">
-          <p className="text-wrapper">
+          <p className="text-wrapper" style={{textAlign: "left"}}>
             Jorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero et velit interdum, ac aliquet odio mattis. Class
             aptent taciti sociosqu ad litora torquent per conubia nostra, per

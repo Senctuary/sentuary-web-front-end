@@ -1,0 +1,22 @@
+.testimonial {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15rem;
+}
+
+.testimonial-title {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    text-align: left;
+    padding-left: 5rem;    
+    margin: 0 0 1rem 0;
+}
+
+.testimonial-container {
+    width: 100%;
+}
