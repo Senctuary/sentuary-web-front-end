@@ -6,6 +6,7 @@ import ProductHighlight from '../home/ProductHighlight'
 import AboutUs from '../home/AboutUs'
 import Categories from '../home/Categories'
 import Testimonial from '../home/Testimonial'
+import { Footer } from '../common/Footer'
 
 const HomeScreen = () => {
   return (
@@ -15,6 +16,7 @@ const HomeScreen = () => {
         <AboutUs />
         <Categories />
         <Testimonial />
+        <Footer />
     </div>
   )
 }

@@ -1,0 +1,33 @@
+.testimonial-carousel {
+    width: 100%;
+}
+.testimonial-card-wrapper {
+    width: 100%;
+    margin-left: 1rem;
+}
+
+.testimonial-card-item {
+    width: fit-content;
+    height: fit-content;
+    margin-right: 3rem;
+}
+
+.p-carousel-items-content {
+    margin-left: 2rem;
+}
+
+.p-carousel-item {
+    opacity: 1 !important;
+    visibility: visible !important; 
+}
+
+.p-carousel-indicators {
+    display: none;
+}
+
+.p-carousel-next, .p-carousel-prev {
+    width: 1rem;
+}
+
+
+

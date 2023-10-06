@@ -1,0 +1,111 @@
+:root {
+  --color-1: rgba(193, 220, 220, 1);
+  --color-2: rgba(30, 30, 30, 1);
+  --color-4: rgba(30, 30, 30, 0.5);
+}
+.footer {
+  background-color: var(--color-1);
+  height: 400px;
+  position: relative;
+  width: 1440px;
+}
+
+.footer .frame {
+  align-items: flex-start;
+  display: inline-flex;
+  flex-direction: column;
+  gap: 24px;
+  left: 96px;
+  position: absolute;
+  top: 48px;
+}
+
+.footer-title, .information {
+  display: inline-flex;
+  align-items: flex-start;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 24px;
+  position: relative;
+  text-align: left;
+}
+
+.footer .p {
+  color: var(--color-4);
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 18px;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: 189px;
+}
+
+.footer .frame-2 {
+  align-items: center;
+  display: inline-flex;
+  flex: 0 0 auto;
+  gap: 24px;
+  position: relative;
+}
+
+.footer .img-wrapper {
+  border: 1px solid;
+  border-color: var(--color-4);
+  border-radius: 24px;
+  height: 48px;
+  position: relative;
+  width: 48px;
+}
+
+.instagram, .facebook, .shopee {
+  height: 20px;
+  left: 13px;
+  position: absolute;
+  top: 13px;
+  width: 20px;
+}
+
+.footer .frame-3 {
+  align-items: flex-start;
+  display: inline-flex;
+  gap: 48px;
+  left: 892px;
+  position: absolute;
+  top: 48px;
+}
+
+.footer .text-wrapper-2 {
+  color: var(--color-2);
+  font-family: "Poppins-Bold", Helvetica;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0;
+  line-height: normal;
+  margin-top: -1px;
+  position: relative;
+  width: fit-content;
+}
+
+.footer .text-wrapper-3 {
+  color: var(--color-4);
+  font-family: "Poppins-Regular", Helvetica;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: 0;
+  line-height: normal;
+  position: relative;
+  width: fit-content;
+}
+
+.footer .text-wrapper-4 {
+  color: var(--color-4);
+  font-family: "Poppins-Medium", Helvetica;
+  font-size: 18px;
+  font-weight: 500;
+  left: 97px;
+  letter-spacing: 0;
+  line-height: normal;
+  position: absolute;
+  top: 324px;
+}
