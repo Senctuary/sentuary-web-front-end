@@ -1,6 +1,7 @@
 import React from "react";
-import { useFormik } from "formik";
+import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import "./ContactDetail.css";
 
 const ContactDetail = () => {
   const initialValues = {
@@ -22,60 +23,78 @@ const ContactDetail = () => {
     console.log("Form Data:", values);
   };
 
-  const formik = useFormik({
-    initialValues,
-    validationSchema,
-    onSubmit,
-  });
-
   return (
     <div>
       <h2>Contact Details</h2>
-      <form onSubmit={formik.handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="fullName">Full Name</label>
-          <input
-            type="text"
-            id="fullName"
-            name="fullName"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.fullName}
-          />
-          {formik.touched.fullName && formik.errors.fullName && (
-            <div className="error">{formik.errors.fullName}</div>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="phoneNumber">Phone Number</label>
-          <input
-            type="tel"
-            id="phoneNumber"
-            name="phoneNumber"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.phoneNumber}
-          />
-          {formik.touched.phoneNumber && formik.errors.phoneNumber && (
-            <div className="error">{formik.errors.phoneNumber}</div>
-          )}
-        </div>
-        <div className="form-group">
-          <label htmlFor="address">Address</label>
-          <input
-            type="text"
-            id="address"
-            name="address"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.address}
-          />
-          {formik.touched.address && formik.errors.address && (
-            <div className="error">{formik.errors.address}</div>
-          )}
-        </div>
-        <button type="submit">Submit</button>
-      </form>
+      <Formik
+        initialValues={initialValues}
+        validationSchema={validationSchema}
+        onSubmit={onSubmit}
+      >
+        {(formik) => (
+          <form onSubmit={formik.handleSubmit}>
+            <div className="form-group">
+              <label htmlFor="fullName">Full Name</label>
+              <Field
+                type="text"
+                id="fullName"
+                name="fullName"
+                onBlur={() => {
+                  if (
+                    formik.values.fullName &&
+                    formik.values.phoneNumber &&
+                    formik.values.address
+                  ) {
+                    formik.submitForm();
+                  }
+                }}
+              />
+              <ErrorMessage name="fullName" component="div" className="error" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="phoneNumber">Phone Number</label>
+              <Field
+                type="tel"
+                id="phoneNumber"
+                name="phoneNumber"
+                onBlur={() => {
+                  if (
+                    formik.values.fullName &&
+                    formik.values.phoneNumber &&
+                    formik.values.address
+                  ) {
+                    formik.submitForm();
+                  }
+                }}
+              />
+              <ErrorMessage
+                name="phoneNumber"
+                component="div"
+                className="error"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="address">Address</label>
+              <Field
+                type="text"
+                id="address"
+                name="address"
+                onBlur={() => {
+                  if (
+                    formik.values.fullName &&
+                    formik.values.phoneNumber &&
+                    formik.values.address
+                  ) {
+                    formik.submitForm();
+                  }
+                }}
+              />
+              <ErrorMessage name="address" component="div" className="error" />
+            </div>
+            {/* <button type="submit">Submit</button> */}
+          </form>
+        )}
+      </Formik>
     </div>
   );
 };
