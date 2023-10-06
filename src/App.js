@@ -8,6 +8,7 @@ import ContactDetail from "./components/customer/checkout/ContactDetail";
 import PaymentMethod from "./components/customer/checkout/PaymentMethod";
 import HistoryOrders from "./components/customer/HistoryOrders";
 import OrderDetail from "./components/customer/OrderDetail";
+import Successful from "./components/customer/checkout/Successful";
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
               <Route
                 path="/checkout/payment"
                 element={<PaymentMethod />}
+              ></Route>              
+              <Route
+                path="/checkout/successful"
+                element={<Successful />}
               ></Route>
             </Route>
             <Route path="/oldOrders" element={<HistoryOrders />}>

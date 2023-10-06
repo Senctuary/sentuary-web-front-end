@@ -4,6 +4,7 @@ import "./FirstPage.css";
 import SubHeader from "../../common/SubHeader";
 import ProductCardOrder from "../../common/productCards/productCardOrder";
 import { Button } from "primereact/button";
+import { Link, useNavigate } from "react-router-dom";
 
 //Get the cart items from LS or API.
 // Then GET item information from API View a product detail
@@ -21,6 +22,8 @@ import { Button } from "primereact/button";
 const FirstPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [productIds, setProductIds] = useState([]);
+  const navigate = useNavigate();
   let itemSample = [
     {
       id: "123e",
@@ -45,9 +48,30 @@ const FirstPage = () => {
     const total = cartItems.reduce((accumulator, item) => {
       return accumulator + item.price * item.quantity;
     }, 0);
+    let productId = [];
+    cartItems.reduce((accumulator, item) => {
+      return productId.push(item.id);
+    }, 0);
 
     setTotalPrice(total);
+    setProductIds(productId);
+    console.log(productIds);
   }, []);
+
+  let navigateNext = () => {
+    // Get the current route
+    let currentRoute = window.location.pathname;
+    console.log(currentRoute);
+    if (currentRoute.includes("contact")) {
+      navigate("/checkout/payment");
+    } else if (currentRoute.includes("payment")) {
+      navigate("/checkout/successful");
+    }
+  };
+
+  const navigateBack = () => {
+    navigate(-1);
+  };
 
   return (
     <div>
@@ -77,8 +101,21 @@ const FirstPage = () => {
           <Outlet />
         </div>
       </div>
-
-      <Button label="Check" icon="pi pi-check" />
+      <div className="buttons-container">
+        <Button
+          label="Back"
+          icon="pi pi-arrow-left"
+          iconPos="left"
+          onClick={navigateBack}
+          severity="secondary"
+        />
+        <Button
+          label="Next"
+          icon="pi pi-arrow-right"
+          iconPos="right"
+          onClick={navigateNext}
+        />
+      </div>
     </div>
   );
 };
