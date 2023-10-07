@@ -1,10 +1,13 @@
-.customize-container .buttons-container .buttons-container {
+.customize-container .buttons-container {
   display: flex;
   width: 100%;
   justify-content: space-between;
   padding: 30px;
   position: absolute;
   top: 70px;
+}
+.customize-container .buttons-container .next-button {
+  background: #15adb7;
 }
 
 .customize-container .content-container {
@@ -71,7 +74,8 @@
   border-radius: 15px !important;
 }
 
-.plants-container label, .vases-container label {
+.plants-container label,
+.vases-container label {
   color: #fff;
   text-shadow: 0px 4px 17px rgba(0, 0, 0, 0.25);
   font-family: Inter;

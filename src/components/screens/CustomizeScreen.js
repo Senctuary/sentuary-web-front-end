@@ -116,6 +116,7 @@ const CustomizeScreen = () => {
       <div className="buttons-container">
         <Button
           label="Back"
+          className="back-button"
           icon="pi pi-arrow-left"
           iconPos="left"
           onClick={navigateBack}
@@ -123,6 +124,7 @@ const CustomizeScreen = () => {
         />
         <Button
           label="Next"
+          className="next-button"
           icon="pi pi-arrow-right"
           iconPos="right"
           onClick={navigateNext}

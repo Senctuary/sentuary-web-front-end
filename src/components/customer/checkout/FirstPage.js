@@ -123,7 +123,7 @@ const FirstPage = () => {
             <></>
           )}
 
-          <h2>{totalPrice}</h2>
+          <h2>Estimate total price: {totalPrice}đ</h2>
         </div>
         <div className="contact-inputs-container col-12 md:col-6">
           <Outlet context={[handleContactData]} />
@@ -132,6 +132,7 @@ const FirstPage = () => {
       <div className="buttons-container">
         <Button
           label="Back"
+          className="back-button"
           icon="pi pi-arrow-left"
           iconPos="left"
           onClick={navigateBack}
@@ -139,6 +140,7 @@ const FirstPage = () => {
         />
         <Button
           label="Next"
+          className="next-button"
           icon="pi pi-arrow-right"
           iconPos="right"
           onClick={navigateNext}
