@@ -26,23 +26,9 @@ const FirstPage = () => {
   const [productIds, setProductIds] = useState([]);
   const [requestBody, setRequestBody] = useState({});
   const navigate = useNavigate();
-  let itemSample = [
-    {
-      id: "123e",
-      name: "Misty Abert",
-      price: 1000,
-      quantity: 1,
-    },
-    {
-      id: "123a",
-      name: "Karl Daugherty",
-      price: 2300,
-      quantity: 1,
-    },
-  ];
+ 
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(itemSample));
-    let cartItems = JSON.parse(localStorage.getItem("cartItems"));
+    let cartItems = JSON.parse(localStorage.getItem("cart"));
     setCartItems(cartItems);
     console.log(cartItems);
 
@@ -98,6 +84,7 @@ const FirstPage = () => {
         .then((response) => {
           if (response.status === 200 || response.status === 201) {
             console.log("Order was successful:", response.data);
+            localStorage.removeItem("cart"); // Remove the cart from LS
             resolve(response); // Resolve the promise for a successful order
           } else {
             console.log("Order failed with status code:", response.status);
@@ -123,6 +110,7 @@ const FirstPage = () => {
             cartItems.map((item) => {
               return (
                 <ProductCardOrder
+                image={item.avatar}
                   name={item.name}
                   price={item.price}
                   quantity={item.quantity}
