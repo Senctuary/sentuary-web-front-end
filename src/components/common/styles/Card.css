@@ -198,3 +198,80 @@
   position: relative;
   width: 20px;
 }
+
+/* POPUP CARD */
+.notification-popup {
+  background-color: #c1dcdc;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
+  position: fixed;
+  top: 50%; /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+  width: 480px;
+  z-index: 1000;
+  padding: 15px;
+}
+
+
+.notification-popup .x-square {
+  align-items: flex-start;
+  align-self: stretch;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 10px;
+  justify-content: flex-end;
+  position: relative;
+  width: 100%;
+}
+
+.notification-popup .x-square-btn {
+  width: 34px;
+  height: 35px;
+  border: 0;
+  outline: 0;
+  margin: 0 0 42px 0;
+  padding: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.notification-popup .img {
+  height: 35px;
+  object-fit: cover;
+  position: relative;
+  width: 34px;
+}
+
+.notification-popup .frame {
+  align-items: center;
+  background-color: #ffffff40;
+  border-radius: 8px;
+  display: flex;
+  flex: 0 0 auto;
+  gap: 68px;
+  justify-content: center;
+  padding: 12px 14px;
+  position: relative;
+  width: 400px;
+  height: 35px;
+  
+}
+
+.notification-popup .div-wrapper {
+  align-items: flex-start;
+  display: inline-flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  gap: 7px;
+  position: relative;
+  color: var(--color-2);
+  font-family: "Poppins";
+  font-size: 24px;
+  font-weight: 500;
+}
+
+
