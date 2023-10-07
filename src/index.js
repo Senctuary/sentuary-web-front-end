@@ -12,6 +12,7 @@ import 'primereact/resources/primereact.css';                       // core css
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/bundle';
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
