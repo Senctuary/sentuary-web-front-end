@@ -1,46 +1,60 @@
+// import React, { useState, useEffect } from "react";
+// import "../styles/Card.css";
+// import AddToCartButton from "../buttons/AddToCartButton";
+
+// const Card = ({ product }) => {
+//   const [image, setImage] = useState(""); // Define the setImage function
+//   const [loading, setLoading] = useState(true);
+
+//   useEffect(() => {
+//     // Assuming you want to display the product's avatar for each card
+//     setImage(product.avatar);
+//     setLoading(false);
+//   }, [product]);
+  
+//   return (
+//     <div className="card">
+//       {loading ? (
+//         <p>Loading...</p>
+//       ) : (
+//           <img className="image" src={image} alt={product.name} /> 
+//       )}
+//           <div className="card-body">
+//             <p className="card-title">{product.name}</p>
+//             <p className="card-price">${product.price}</p>
+//             <AddToCartButton onClick={product} />
+//           </div>
+//     </div>
+//   );
+// };
+
+// export default Card;
+
+// Card.js
 import React, { useState, useEffect } from "react";
 import "../styles/Card.css";
 import AddToCartButton from "../buttons/AddToCartButton";
 
-const Card = () => {
-  const [image, setImage] = useState("");
+const Card = ({ product }) => {
+  const [image, setImage] = useState(""); 
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Function to fetch a random image from Unsplash
-    const fetchRandomImage = async () => {
-      try {
-        const topic = "cactus"; // Search query
-
-        const response = await fetch(
-          "https://api.unsplash.com/photos/random?query=cactus&client_id=wc1Xg-SiEPLbjNAGrRXfBvvoXtnLFKNvnH6BgkHr3Pg"
-        );
-        if (!response.ok) {
-          throw new Error("Failed to fetch images");
-        }
-        console.log(response);
-        const imageData = await response.json();
-        console.log(imageData);
-        setImage(imageData.urls.regular);
-        setLoading(false);
-      } catch (error) {
-        console.error("Error fetching image:", error);
-      }
-    };
-
-    fetchRandomImage();
-  }, []);
+    setImage(product.avatar);
+    setLoading(false);
+  }, [product]);
+  
   return (
     <div className="card">
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <img className="image" src={image} alt="Random Unsplash Image" />
+        <img className="image" src={image} alt={product.name} /> 
       )}
       <div className="card-body">
-        <p className="card-title">Cactus</p>
-        <p className="card-price">$20</p>
-        <AddToCartButton/>
+        <p className="card-title">{product.name}</p>
+        <p className="card-price">${product.price}</p>
+        <AddToCartButton product={product} /> {/* Ensure that you pass the product here */}
       </div>
     </div>
   );

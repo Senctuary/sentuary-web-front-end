@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "../styles/Navigation.css";
 import "font-awesome/css/font-awesome.min.css";
 import { Link } from "react-router-dom";
@@ -6,6 +6,16 @@ import { Link } from "react-router-dom";
 const logo = require("../../../assets/images/logo.png");
 
 const Navigation = () => {
+  const [cartNumber, setCartNumber] = useState(0);
+
+  let cartItems;
+
+  setInterval(() => {
+    cartItems = JSON.parse(localStorage.getItem("cart"))?.length;
+    setCartNumber(cartItems);
+    console.log(cartItems); 
+  }, 1000);
+
   return (
     <nav className="navigation">
       <span className="left">
@@ -21,11 +31,12 @@ const Navigation = () => {
       <span className="right">
         <div className="profile-btn">
           <Link
-          to={"/checkout/contact"}
+            to={"/checkout/contact"}
             className="shopping-cart-btn"
             style={{ margin: "0 10px 5px 15px" }}
           >
             <i className="fa fa-shopping-cart" style={{ color: "#1E1E1E" }}></i>
+            <span className="cart-number">{cartNumber}</span>
           </Link>
 
           <button className="user-btn" style={{ margin: "0 0 5px 15px" }}>
