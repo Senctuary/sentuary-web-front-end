@@ -103,9 +103,9 @@ const FirstPage = () => {
   return (
     <div>
       <SubHeader title="Add info" progressBar="inline-block" />
-      <h2>Order Summary</h2>
 
       <div className="firstpage-container grid grid-nogutter">
+        <h2 style={{ width: "100%" }}>Order Summary</h2>
         {/* Display choosen products */}
         <div className="products-container col-12 md:col-6">
           {cartItems != null ? (
@@ -128,23 +128,23 @@ const FirstPage = () => {
         <div className="contact-inputs-container col-12 md:col-6">
           <Outlet context={[handleContactData]} />
         </div>
-      </div>
-      <div className="buttons-container">
-        <Button
-          label="Back"
-          className="back-button"
-          icon="pi pi-arrow-left"
-          iconPos="left"
-          onClick={navigateBack}
-          severity="secondary"
-        />
-        <Button
-          label="Next"
-          className="next-button"
-          icon="pi pi-arrow-right"
-          iconPos="right"
-          onClick={navigateNext}
-        />
+        <div className="buttons-container">
+          <Button
+            label="Back"
+            className="back-button"
+            icon="pi pi-arrow-left"
+            iconPos="left"
+            onClick={navigateBack}
+            severity="secondary"
+          />
+          <Button
+            label="Next"
+            className="next-button"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            onClick={navigateNext}
+          />
+        </div>
       </div>
     </div>
   );
