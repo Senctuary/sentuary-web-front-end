@@ -26,24 +26,26 @@ const FirstPage = () => {
   const [productIds, setProductIds] = useState([]);
   const [requestBody, setRequestBody] = useState({});
   const navigate = useNavigate();
- 
+
   useEffect(() => {
     let cartItems = JSON.parse(localStorage.getItem("cart"));
     setCartItems(cartItems);
     console.log(cartItems);
 
     // Calculate the total price
-    const total = cartItems.reduce((accumulator, item) => {
-      return accumulator + item.price * item.quantity;
-    }, 0);
-    let productId = [];
-    cartItems.reduce((accumulator, item) => {
-      return productId.push(item.id);
-    }, 0);
+    if (cartItems) {
+      const total = cartItems.reduce((accumulator, item) => {
+        return accumulator + item.price * item.quantity;
+      }, 0);
+      let productId = [];
+      cartItems.reduce((accumulator, item) => {
+        return productId.push(item.id);
+      }, 0);
 
-    setTotalPrice(total);
-    setProductIds(productId);
-    console.log(productIds);
+      setTotalPrice(total);
+      setProductIds(productId);
+      console.log(productIds);
+    }
   }, []);
 
   let navigateNext = () => {
@@ -110,7 +112,7 @@ const FirstPage = () => {
             cartItems.map((item) => {
               return (
                 <ProductCardOrder
-                image={item.avatar}
+                  image={item.avatar}
                   name={item.name}
                   price={item.price}
                   quantity={item.quantity}
