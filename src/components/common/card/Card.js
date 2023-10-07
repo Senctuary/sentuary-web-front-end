@@ -34,10 +34,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Card.css";
 import AddToCartButton from "../buttons/AddToCartButton";
+import { useNavigate } from "react-router-dom";
 
 const Card = ({ product }) => {
   const [image, setImage] = useState(""); 
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setImage(product.avatar);
@@ -45,7 +47,7 @@ const Card = ({ product }) => {
   }, [product]);
   
   return (
-    <div className="card">
+    <div className="card" onClick={handleCustomize}>
       {loading ? (
         <p>Loading...</p>
       ) : (
