@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./styles/CustomizeScreen.css";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -15,6 +15,7 @@ const API_DOMAIN = "https://6520dfdb906e276284c4c0db.mockapi.io";
 const CustomizeScreen = () => {
   const [plants, setPlants] = useState([]);
   const [vases, setVases] = useState([]);
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const navigate = useNavigate();
 
   let getPlants = () => {
@@ -54,6 +55,9 @@ const CustomizeScreen = () => {
     getVases();
   }, []);
 
+  const plantsSwiperRef = useRef(null);
+  const vasesSwiperRef = useRef(null);
+
   let navigateNext = () => {
     // Navigate to the Checkout page
     navigate("/checkout/contact");
@@ -65,19 +69,48 @@ const CustomizeScreen = () => {
 
   const paginationSwipe = {
     clickable: true,
-    dynamicBullets: true,
   };
 
   const plantSwiperParams = {
     grabCursor: true,
     pagination: paginationSwipe,
-    slidesPerView: 'auto',
+    slidesPerView: "auto",
     spaceBetween: 30,
     centeredSlides: false,
     loop: true,
     modules: [Pagination],
+    onSlideChange: (swiper) => {
+      // Update the current slide index when the slide changes
+      setCurrentSlideIndex(swiper.activeIndex);
+    },
   };
 
+  const getCurrentPlantContent = () => {
+    const activeSwiper = plantsSwiperRef.current;
+    if (!activeSwiper) {
+      return null;
+    }
+
+    const activeIndex = activeSwiper.swiper.activeIndex;
+
+    if (activeSwiper.classList.contains("plantsSwiper")) {
+      return plants[activeIndex];
+    }
+    return null;
+  };
+  const getCurrentVaseContent = () => {
+    const activeSwiper = vasesSwiperRef.current;
+    if (!activeSwiper) {
+      return null;
+    }
+
+    const activeIndex = activeSwiper.swiper.activeIndex;
+
+    if (activeSwiper.classList.contains("vasesSwiper")) {
+      return vases[activeIndex];
+    }
+    return null;
+  };
   return (
     <div>
       <div className="buttons-container">
@@ -97,11 +130,31 @@ const CustomizeScreen = () => {
       </div>
 
       <div className="content-container grid grid-nogutter">
-        <div className="preview-container col-12 md:col-3"></div>
+        <div className="preview-container col-12 md:col-3">
+          {/* <span>{getCurrentPlantContent()?.image}</span> */}
+          <img
+            className="choosen-plant-pic"
+            src={getCurrentPlantContent()?.image}
+            alt={getCurrentPlantContent()?.name}
+            style={{ display: "block", width: "70%", height: "30%" }}
+          />
+
+          <img
+            className="choosen-plant-pic"
+            src={getCurrentVaseContent()?.image}
+            alt={getCurrentVaseContent()?.name}
+            style={{ display: "block", width: "70%", height: "30%" }}
+          />
+        </div>
         <div className="choose-container col-12 md:col-9">
           <div className="plants-container">
             <label>Các loại cây</label>
-            <Swiper {...plantSwiperParams} className="plantsSwiper">
+            <Swiper
+              {...plantSwiperParams}
+              className="plantsSwiper"
+              id="plantsSwiper"
+              ref={plantsSwiperRef}
+            >
               {plants.map((plant) => (
                 <SwiperSlide key={plant.id}>
                   <div>
@@ -113,7 +166,12 @@ const CustomizeScreen = () => {
           </div>
           <div className="vases-container">
             <label>Các loại chậu</label>
-            <Swiper {...plantSwiperParams} className="vasesSwiper">
+            <Swiper
+              {...plantSwiperParams}
+              className="vasesSwiper"
+              id="vasesSwiper"
+              ref={vasesSwiperRef}
+            >
               {vases.map((vase) => (
                 <SwiperSlide key={vase.id}>
                   <div>
