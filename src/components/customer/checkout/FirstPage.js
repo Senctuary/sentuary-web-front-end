@@ -29,15 +29,15 @@ const FirstPage = () => {
   let itemSample = [
     {
       id: "123e",
-      name: "Cactus",
+      name: "Misty Abert",
       price: 1000,
-      quantity: 10,
+      quantity: 1,
     },
     {
       id: "123a",
-      name: "Lovely vase",
+      name: "Karl Daugherty",
       price: 2300,
-      quantity: 10,
+      quantity: 1,
     },
   ];
   useEffect(() => {

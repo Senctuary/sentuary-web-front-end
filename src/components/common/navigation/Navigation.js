@@ -3,6 +3,7 @@ import "../styles/Navigation.css";
 import "font-awesome/css/font-awesome.min.css";
 import { Link } from "react-router-dom";
 
+
 const logo = require("../../../assets/images/logo.png");
 
 const Navigation = () => {
@@ -19,7 +20,7 @@ const Navigation = () => {
   return (
     <nav className="navigation">
       <span className="left">
-        <span>SENIK</span>
+        <img src={logo} alt="logo"  className="crop-logo"></img>
       </span>
 
       <span className="center">

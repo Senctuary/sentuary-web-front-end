@@ -37,7 +37,7 @@ const CustomizeScreen = () => {
   let getVases = () => {
     return new Promise((resolve, reject) => {
       axios
-        .get(`${API_DOMAIN}/plants`)
+        .get(`${API_DOMAIN}/vases`)
         .then((response) => {
           if (response) {
             setVases(response.data);
@@ -112,7 +112,7 @@ const CustomizeScreen = () => {
     return null;
   };
   return (
-    <div>
+    <div className="customize-container">
       <div className="buttons-container">
         <Button
           label="Back"

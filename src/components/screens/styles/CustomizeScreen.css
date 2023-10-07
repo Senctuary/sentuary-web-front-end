@@ -1,4 +1,4 @@
-.buttons-container {
+.customize-container .buttons-container .buttons-container {
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -7,7 +7,7 @@
   top: 70px;
 }
 
-.content-container {
+.customize-container .content-container {
   min-height: 88vh;
   gap: 0px;
 
@@ -71,7 +71,7 @@
   border-radius: 15px !important;
 }
 
-label {
+.plants-container label, .vases-container label {
   color: #fff;
   text-shadow: 0px 4px 17px rgba(0, 0, 0, 0.25);
   font-family: Inter;

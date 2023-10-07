@@ -46,12 +46,16 @@ const Card = ({ product }) => {
     setLoading(false);
   }, [product]);
   
+  let handleCustomize = () => {
+    navigate(`/customize/${product.id}`);
+  };
+
   return (
-    <div className="card" onClick={handleCustomize}>
+    <div className="card">
       {loading ? (
         <p>Loading...</p>
       ) : (
-        <img className="image" src={image} alt={product.name} /> 
+        <img className="image" src={image} alt={product.name} onClick={handleCustomize}/> 
       )}
       <div className="card-body">
         <p className="card-title">{product.name}</p>
