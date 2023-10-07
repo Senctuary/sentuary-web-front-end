@@ -12,7 +12,7 @@ const ProductHighlight = () => {
         <SeeMoreButton />
       </div>
       <div className='product-highlight__gallery'>
-        <Card />
+        <Card id="1"/>
         <Card />
         <Card />
         <Card />

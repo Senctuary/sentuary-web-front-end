@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "../styles/Card.css";
 import AddToCartButton from "../buttons/AddToCartButton";
+import { useNavigate } from "react-router-dom";
 
-const Card = () => {
+const Card = (props) => {
   const [image, setImage] = useState("");
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Function to fetch a random image from Unsplash
@@ -30,8 +32,12 @@ const Card = () => {
 
     fetchRandomImage();
   }, []);
+
+  let handleCustomize = () => {
+    navigate(`/customize/${props.id}`);
+  };
   return (
-    <div className="card">
+    <div className="card" onClick={handleCustomize}>
       {loading ? (
         <p>Loading...</p>
       ) : (
@@ -40,7 +46,7 @@ const Card = () => {
       <div className="card-body">
         <p className="card-title">Cactus</p>
         <p className="card-price">$20</p>
-        <AddToCartButton/>
+        <AddToCartButton />
       </div>
     </div>
   );

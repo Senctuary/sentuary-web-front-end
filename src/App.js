@@ -9,6 +9,7 @@ import PaymentMethod from "./components/customer/checkout/PaymentMethod";
 import HistoryOrders from "./components/customer/HistoryOrders";
 import OrderDetail from "./components/customer/OrderDetail";
 import Successful from "./components/customer/checkout/Successful";
+import CustomizeScreen from "./components/screens/CustomizeScreen";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         </header>
         <Routes>
           <Route path="/" element={<HomeScreen />} />
+          <Route path="/customize/:id" element={<CustomizeScreen />} />
           <Route path="/checkout" element={<FirstPage />}>
             <Route path="/checkout/contact" element={<ContactDetail />}></Route>
             <Route path="/checkout/payment" element={<PaymentMethod />}></Route>
