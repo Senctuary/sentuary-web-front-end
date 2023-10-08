@@ -1,5 +1,8 @@
 .firstpage-container{
     /* display: flex; */
+    max-width: 1080px !important;
+    margin: auto !important;
+
 }
 
 .products-container {

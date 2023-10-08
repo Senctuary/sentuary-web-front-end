@@ -26,38 +26,26 @@ const FirstPage = () => {
   const [productIds, setProductIds] = useState([]);
   const [requestBody, setRequestBody] = useState({});
   const navigate = useNavigate();
-  let itemSample = [
-    {
-      id: "123e",
-      name: "Misty Abert",
-      price: 1000,
-      quantity: 1,
-    },
-    {
-      id: "123a",
-      name: "Karl Daugherty",
-      price: 2300,
-      quantity: 1,
-    },
-  ];
+
   useEffect(() => {
-    localStorage.setItem("cartItems", JSON.stringify(itemSample));
-    let cartItems = JSON.parse(localStorage.getItem("cartItems"));
+    let cartItems = JSON.parse(localStorage.getItem("cart"));
     setCartItems(cartItems);
     console.log(cartItems);
 
     // Calculate the total price
-    const total = cartItems.reduce((accumulator, item) => {
-      return accumulator + item.price * item.quantity;
-    }, 0);
-    let productId = [];
-    cartItems.reduce((accumulator, item) => {
-      return productId.push(item.id);
-    }, 0);
+    if (cartItems) {
+      const total = cartItems.reduce((accumulator, item) => {
+        return accumulator + item.price * item.quantity;
+      }, 0);
+      let productId = [];
+      cartItems.reduce((accumulator, item) => {
+        return productId.push(item.id);
+      }, 0);
 
-    setTotalPrice(total);
-    setProductIds(productId);
-    console.log(productIds);
+      setTotalPrice(total);
+      setProductIds(productId);
+      console.log(productIds);
+    }
   }, []);
 
   let navigateNext = () => {
@@ -98,6 +86,7 @@ const FirstPage = () => {
         .then((response) => {
           if (response.status === 200 || response.status === 201) {
             console.log("Order was successful:", response.data);
+            localStorage.removeItem("cart"); // Remove the cart from LS
             resolve(response); // Resolve the promise for a successful order
           } else {
             console.log("Order failed with status code:", response.status);
@@ -114,15 +103,16 @@ const FirstPage = () => {
   return (
     <div>
       <SubHeader title="Add info" progressBar="inline-block" />
-      <h2>Order Summary</h2>
 
       <div className="firstpage-container grid grid-nogutter">
+        <h2 style={{ width: "100%" }}>Order Summary</h2>
         {/* Display choosen products */}
         <div className="products-container col-12 md:col-6">
           {cartItems != null ? (
             cartItems.map((item) => {
               return (
                 <ProductCardOrder
+                  image={item.avatar}
                   name={item.name}
                   price={item.price}
                   quantity={item.quantity}
@@ -133,26 +123,28 @@ const FirstPage = () => {
             <></>
           )}
 
-          <h2>{totalPrice}</h2>
+          <h2>Estimate total price: {totalPrice}đ</h2>
         </div>
         <div className="contact-inputs-container col-12 md:col-6">
           <Outlet context={[handleContactData]} />
         </div>
-      </div>
-      <div className="buttons-container">
-        <Button
-          label="Back"
-          icon="pi pi-arrow-left"
-          iconPos="left"
-          onClick={navigateBack}
-          severity="secondary"
-        />
-        <Button
-          label="Next"
-          icon="pi pi-arrow-right"
-          iconPos="right"
-          onClick={navigateNext}
-        />
+        <div className="buttons-container">
+          <Button
+            label="Back"
+            className="back-button"
+            icon="pi pi-arrow-left"
+            iconPos="left"
+            onClick={navigateBack}
+            severity="secondary"
+          />
+          <Button
+            label="Next"
+            className="next-button"
+            icon="pi pi-arrow-right"
+            iconPos="right"
+            onClick={navigateNext}
+          />
+        </div>
       </div>
     </div>
   );

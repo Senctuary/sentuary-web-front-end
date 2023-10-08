@@ -8,20 +8,40 @@
   padding: 12px 42px 12px 14px;
   align-items: flex-start;
   gap: 68px;
-  border-radius: 8px;
+  margin-right: 100px;
+  border-bottom: 2px solid #c4c4c4;
   background: rgba(255, 255, 255, 0.25);
 }
 
-.informationContainer {
+.productCardContainer .informationContainer {
   display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 7px;
 }
 
-.buttonsContainer {
+.buttons-container {
+  width: 100%;
   display: inline-flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   gap: 28px;
+}
+
+.buttons-container .back-button {
+  border-radius: 8px;
+  border: 1.5px solid #c1dcdc;
+  background: #fff;
+}
+
+.buttons-container .next-button {
+  border: none;
+  border-radius: 8px;
+  background: var(--Color-1, #c1dcdc);
+}
+
+.buttons-container .back-button span,
+.buttons-container .next-button span {
+  color: var(--Color-2, #1e1e1e);
+  font-size: 18px;
 }
