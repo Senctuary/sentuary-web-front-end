@@ -29,7 +29,7 @@ const ContactDetail = () => {
 
   return (
     <div>
-      <h2>Contact Details</h2>
+      <h2>Thông tin liên hệ</h2>
       <Formik
         initialValues={initialValues}
         validationSchema={validationSchema}
@@ -38,7 +38,7 @@ const ContactDetail = () => {
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <div className="form-group">
-              <label htmlFor="name">Full Name</label>
+              <label htmlFor="name">Họ & tên</label>
               <Field
                 type="text"
                 id="name"
@@ -56,7 +56,7 @@ const ContactDetail = () => {
               <ErrorMessage name="name" component="div" className="error" />
             </div>
             <div className="form-group">
-              <label htmlFor="phoneNumber">Phone Number</label>
+              <label htmlFor="phoneNumber">Số điện thoại</label>
               <Field
                 type="tel"
                 id="phoneNumber"
@@ -78,7 +78,7 @@ const ContactDetail = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="address">Address</label>
+              <label htmlFor="address">Địa chỉ giao hàng</label>
               <Field
                 type="text"
                 id="address"

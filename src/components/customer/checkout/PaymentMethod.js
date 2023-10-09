@@ -45,11 +45,11 @@ const PaymentMethod = () => {
 
   return (
     <div>
-      <h2>Payment Methods</h2>
+      <h2>Phương thức thanh toán:</h2>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
-            <div>Select the payment:</div>
+            <div>Vui lòng chọn phương thức:</div>
             <div role="group" aria-labelledby="my-radio-group">
               {paymentMethods.map((method) => (
                 <div key={method.id}>
