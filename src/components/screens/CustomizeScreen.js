@@ -8,6 +8,7 @@ import { register } from "swiper/element/bundle";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
 import "swiper/css/pagination";
+import ChatGPT from "../customer/ChatGPT";
 
 // const API_DOMAIN = process.env.REACT_APP_API_DOMAIN;
 const API_DOMAIN = "https://6520dfdb906e276284c4c0db.mockapi.io";
@@ -188,6 +189,10 @@ const CustomizeScreen = () => {
 
       <div className="stickers-container">
         {/* <label>Các loại nhãn dán</label> */}
+      </div>
+
+      <div>
+        <ChatGPT></ChatGPT>
       </div>
     </div>
   );

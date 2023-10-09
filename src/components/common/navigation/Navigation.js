@@ -12,9 +12,9 @@ const Navigation = () => {
   let cartItems;
 
   setInterval(() => {
-    cartItems = JSON.parse(localStorage.getItem("cart"))?.length;
-    setCartNumber(cartItems);
-    console.log(cartItems); 
+    // cartItems = JSON.parse(localStorage.getItem("cart"))?.length;
+    // setCartNumber(cartItems);
+    // console.log(cartItems); 
   }, 1000);
 
   return (
