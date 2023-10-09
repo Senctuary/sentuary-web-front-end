@@ -274,4 +274,11 @@
   font-weight: 500;
 }
 
-
+/* PRODUCT CARD */
+.product-card {
+  width: 47.9375rem ;
+  height: 20.375rem;
+  display: flex !important; 
+  flex-direction: row !important;
+  margin: 5rem;
+}

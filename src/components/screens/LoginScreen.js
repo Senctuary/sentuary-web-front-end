@@ -37,14 +37,13 @@ const LoginScreen = () => {
             // const token = sign(userMatch, process.env.REACT_APP_SECRET_KEY, {
             //   expiresIn: "1d",
             // });
-            localStorage.setItem("jwtToken", data.token);
+            localStorage.setItem("jwtToken", data);
             console.log(data.token);
-            navigate("/");
+            navigate("/admin");
           } else {
             setFieldError("password", "Invalid username or password");
           }
       } else {
-        // Log the response status and response body for debugging
         console.error("API Error - Response Status:", response.status);
         const responseText = await response.text();
         console.error("API Error - Response Body:", responseText);

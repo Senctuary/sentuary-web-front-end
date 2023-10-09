@@ -1,0 +1,40 @@
+.admin-dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  top: 0;
+}
+
+.admin-dashboard-content {
+    width: 100%;
+    margin-top: 5rem;
+}
+
+.p-tabview-panels {
+    background: var(--Color-1, #C1DCDC);
+    margin: 16px 12px;
+    border-radius: 12px;
+    
+}
+
+.admin-dashboard-content .p-tabview {
+    display: flex;
+    align-items: flex-start;
+}
+
+.vertical-tabs .p-tabview-nav {
+  flex-direction: column !important;
+}
+
+.vertical-tabs .p-tabview-nav .p-tabview-nav-link {
+  text-align: left !important;
+  width: 100% !important;
+}
+
+.p-tabview-selected a {
+    background-color: #C1DCDC;
+}

@@ -4,6 +4,7 @@ import {
   Routes,
   Route,
   useLocation,
+  Navigate
 } from "react-router-dom";
 
 import Navigation from "./components/common/navigation/Navigation";
@@ -16,6 +17,7 @@ import OrderDetail from "./components/customer/OrderDetail";
 import Successful from "./components/customer/checkout/Successful";
 import CustomizeScreen from "./components/screens/CustomizeScreen";
 import LoginScreen from "./components/screens/LoginScreen";
+import AdminDashboard from "./components/screens/AdminDashboard";
 
 function Header() {
   // Use useLocation inside a component function
@@ -23,9 +25,28 @@ function Header() {
 
   return (
     <header className="App-header">
-      {location.pathname !== "/login" && <Navigation />}
+      {location.pathname !== "/login" && location.pathname !== "/admin" && <Navigation />}
+      
     </header>
   );
+}
+
+function PrivateRoute({ element, isAuthenticated }) {
+  const location = useLocation();
+
+  return isAuthenticated ? (
+    element
+  ) : (
+    <Navigate to="/login" state={{ from: location.pathname }} />
+  );
+}
+
+function checkLogin() {
+  const token = localStorage.getItem("jwtToken");
+  if (!token) {
+    return false;
+  }
+  return true;
 }
 
 function App() {
@@ -36,6 +57,10 @@ function App() {
         <Header />
         <Routes>
           <Route path="/login" element={<LoginScreen />} />
+          <Route
+            path="/admin"
+            element={<PrivateRoute element={<AdminDashboard />} isAuthenticated={checkLogin()} />}
+          />
           <Route path="/" element={<HomeScreen />} />
           <Route path="/customize/:id" element={<CustomizeScreen />} />
           <Route path="/checkout" element={<FirstPage />}>
