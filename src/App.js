@@ -1,5 +1,10 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+} from "react-router-dom";
 
 import Navigation from "./components/common/navigation/Navigation";
 import HomeScreen from "./components/screens/HomeScreen";
@@ -10,27 +15,38 @@ import HistoryOrders from "./components/customer/HistoryOrders";
 import OrderDetail from "./components/customer/OrderDetail";
 import Successful from "./components/customer/checkout/Successful";
 import CustomizeScreen from "./components/screens/CustomizeScreen";
+import LoginScreen from "./components/screens/LoginScreen";
+
+function Header() {
+  // Use useLocation inside a component function
+  const location = useLocation();
+
+  return (
+    <header className="App-header">
+      {location.pathname !== "/login" && <Navigation />}
+    </header>
+  );
+}
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          <Navigation />
-        </header>
+        {/* Render the Header component */}
+        <Header />
         <Routes>
+          <Route path="/login" element={<LoginScreen />} />
           <Route path="/" element={<HomeScreen />} />
           <Route path="/customize/:id" element={<CustomizeScreen />} />
           <Route path="/checkout" element={<FirstPage />}>
-            <Route path="/checkout/contact" element={<ContactDetail />}></Route>
-            <Route path="/checkout/payment" element={<PaymentMethod />}></Route>
+            <Route path="/checkout/contact" element={<ContactDetail />} />
+            <Route path="/checkout/payment" element={<PaymentMethod />} />
           </Route>
-          <Route path="/successful" element={<Successful />}></Route>
+          <Route path="/successful" element={<Successful />} />
           <Route path="/oldOrders" element={<HistoryOrders />}>
-            <Route path="/oldOrders/:id" element={<OrderDetail />}></Route>
+            <Route path="/oldOrders/:id" element={<OrderDetail />} />
           </Route>
         </Routes>
-        <footer>Footer content goes here</footer>
       </div>
     </Router>
   );
