@@ -53,7 +53,7 @@ const FirstPage = () => {
     let currentRoute = window.location.pathname;
     console.log(currentRoute);
     if (currentRoute.includes("contact")) {
-      navigate("/checkout/payment", { state: { requestBody: requestBody } });
+      navigate("/checkout/payment", { state: { requestBody: requestBody, totalPrice: totalPrice } });
     } else if (currentRoute.includes("payment")) {
       let fullRequestBody = localStorage.getItem("fullRequestBody");
       makeOrder(fullRequestBody)
