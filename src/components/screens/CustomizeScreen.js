@@ -190,10 +190,6 @@ const CustomizeScreen = () => {
       <div className="stickers-container">
         {/* <label>Các loại nhãn dán</label> */}
       </div>
-
-      <div>
-        <ChatGPT></ChatGPT>
-      </div>
     </div>
   );
 };

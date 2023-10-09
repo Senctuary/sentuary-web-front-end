@@ -10,6 +10,7 @@ import HistoryOrders from "./components/customer/HistoryOrders";
 import OrderDetail from "./components/customer/OrderDetail";
 import Successful from "./components/customer/checkout/Successful";
 import CustomizeScreen from "./components/screens/CustomizeScreen";
+import ChatGPT from "./components/customer/ChatGPT";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
           </Route>
         </Routes>
         <footer>Footer content goes here</footer>
+        <ChatGPT/>
       </div>
     </Router>
   );
