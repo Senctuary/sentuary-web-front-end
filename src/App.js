@@ -1,5 +1,11 @@
 import "./App.css";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useLocation,
+  Navigate,
+} from "react-router-dom";
 
 import Navigation from "./components/common/navigation/Navigation";
 import HomeScreen from "./components/screens/HomeScreen";
@@ -10,25 +16,71 @@ import HistoryOrders from "./components/customer/HistoryOrders";
 import OrderDetail from "./components/customer/OrderDetail";
 import Successful from "./components/customer/checkout/Successful";
 import CustomizeScreen from "./components/screens/CustomizeScreen";
+import LoginScreen from "./components/screens/LoginScreen";
+import AdminDashboard from "./components/screens/AdminDashboard";
+import AddProductScreen from "./components/screens/AddProductScreen";
+
+function Header() {
+  // Use useLocation inside a component function
+  const location = useLocation();
+
+  return (
+    <header className="App-header">
+      {location.pathname !== "/login" && location.pathname !== "/admin" && (
+        <Navigation />
+      )}
+    </header>
+  );
+}
+
+function PrivateRoute({ element, isAuthenticated }) {
+  const location = useLocation();
+
+  return isAuthenticated ? (
+    element
+  ) : (
+    <Navigate to="/login" state={{ from: location.pathname }} />
+  );
+}
+
+function checkLogin() {
+  const token = localStorage.getItem("jwtToken");
+  if (!token) {
+    return false;
+  }
+  return true;
+}
 import ChatGPT from "./components/customer/ChatGPT";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        <header className="App-header">
-          <Navigation />
-        </header>
+        {/* Render the Header component */}
+        <Header />
         <Routes>
+          <Route path="/login" element={<LoginScreen />} />
+          {/* ADMIN FLOW */}
+          <Route
+            path="/admin"
+            element={
+              <PrivateRoute
+                element={<AdminDashboard />}
+                isAuthenticated={checkLogin()}
+              />
+            }
+          />
+          <Route path="/admin/add-product" element={<AddProductScreen />} />
+          {/* CUSTOMER FLOW */}
           <Route path="/" element={<HomeScreen />} />
           <Route path="/customize/:id" element={<CustomizeScreen />} />
           <Route path="/checkout" element={<FirstPage />}>
-            <Route path="/checkout/contact" element={<ContactDetail />}></Route>
-            <Route path="/checkout/payment" element={<PaymentMethod />}></Route>
+            <Route path="/checkout/contact" element={<ContactDetail />} />
+            <Route path="/checkout/payment" element={<PaymentMethod />} />
           </Route>
-          <Route path="/successful" element={<Successful />}></Route>
+          <Route path="/successful" element={<Successful />} />
           <Route path="/oldOrders" element={<HistoryOrders />}>
-            <Route path="/oldOrders/:id" element={<OrderDetail />}></Route>
+            <Route path="/oldOrders/:id" element={<OrderDetail />} />
           </Route>
         </Routes>
         <footer>Footer content goes here</footer>
