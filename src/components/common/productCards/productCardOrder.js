@@ -15,7 +15,7 @@ const ProductCardOrder = (props) => {
       <div class="informationContainer">
         <h3 class="name">{props.name}</h3>
         <p class="price">{props.price}</p>
-        <p class="quantity">Quantity: {props.quantity}</p>
+        <p class="quantity">Số lượng: {props.quantity}</p>
         <div class="buttonsContainer">
           <ExploreButton displayBtn="none" title={props.title}></ExploreButton>
           <i

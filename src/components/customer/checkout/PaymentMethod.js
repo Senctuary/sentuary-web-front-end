@@ -11,7 +11,7 @@ const PaymentMethod = () => {
   let [selectedPaymentMethod, setSelectedPaymentMethod] = useState("");
 
   const location = useLocation();
-  const { requestBody } = location.state || {};
+  const { requestBody, totalPrice } = location.state || {};
 
   let initialValues = {
     paymentMethodId: "",
@@ -35,6 +35,26 @@ const PaymentMethod = () => {
     getMethods();
   }, []);
 
+  const displayVietQR = (amount) => {
+    let BANK_ID = "970422";
+    let ACCOUNT_NO = "0365960823";
+    let TEMPLATE = "compact";
+    let DESCRIPTION = "Senik PAYMENT";
+    let ACCOUNT_NAME = "NGUYEN TRUNG THONG";
+    let url = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-${TEMPLATE}.png?amount=${amount}&addInfo=${DESCRIPTION}&accountName=${ACCOUNT_NAME}`;
+    let qrcodeContainer = document.querySelector(".qrcode-container");
+    qrcodeContainer.innerHTML = `
+    <div className="qr-container">
+        <img src=${url} alt="VietQR" className="qr" />
+        <p className="qr-description">
+          Quét mã QR bằng ứng dụng ngân hàng để thanh toán.          
+        </p>
+        <p>Để xác nhận đơn hàng sau khi thanh toán:</p>
+        <p>- Quý khách vui lòng liên hệ 0365960*** để xác nhận đơn hàng.</p>
+      </div>
+      `;
+  };
+
   const onSubmit = (values) => {
     // You can handle form submission logic here
     console.log("Form Data:", values);
@@ -45,11 +65,11 @@ const PaymentMethod = () => {
 
   return (
     <div>
-      <h2>Payment Methods</h2>
+      <h2>Phương thức thanh toán:</h2>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
-            <div>Select the payment:</div>
+            <div>Vui lòng chọn phương thức:</div>
             <div role="group" aria-labelledby="my-radio-group">
               {paymentMethods.map((method) => (
                 <div key={method.id}>
@@ -66,6 +86,9 @@ const PaymentMethod = () => {
                         setSelectedPaymentMethod(method.id);
                         formik.setFieldValue("paymentMethodId", method.id);
                         formik.submitForm();
+                        if (method.name.includes("QR")) {
+                          displayVietQR(totalPrice);
+                        }
                       }}
                     />
                     {method.name}
@@ -76,6 +99,9 @@ const PaymentMethod = () => {
           </form>
         )}
       </Formik>
+
+      <h1>{totalPrice}</h1>
+      <div className="qrcode-container"></div>
     </div>
   );
 };

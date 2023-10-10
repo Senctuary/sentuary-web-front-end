@@ -53,7 +53,7 @@ const FirstPage = () => {
     let currentRoute = window.location.pathname;
     console.log(currentRoute);
     if (currentRoute.includes("contact")) {
-      navigate("/checkout/payment", { state: { requestBody: requestBody } });
+      navigate("/checkout/payment", { state: { requestBody: requestBody, totalPrice: totalPrice } });
     } else if (currentRoute.includes("payment")) {
       let fullRequestBody = localStorage.getItem("fullRequestBody");
       makeOrder(fullRequestBody)
@@ -102,10 +102,10 @@ const FirstPage = () => {
 
   return (
     <div>
-      <SubHeader title="Add info" progressBar="inline-block" />
+      <SubHeader title="Thêm thông tin" progressBar="inline-block" />
 
       <div className="firstpage-container grid grid-nogutter">
-        <h2 style={{ width: "100%" }}>Order Summary</h2>
+        <h2 style={{ width: "100%" }}>Đơn hàng gồm:</h2>
         {/* Display choosen products */}
         <div className="products-container col-12 md:col-6">
           {cartItems != null ? (
@@ -123,14 +123,14 @@ const FirstPage = () => {
             <></>
           )}
 
-          <h2>Estimate total price: {totalPrice}đ</h2>
+          <h2>Tổng giá ước tính: {totalPrice}đ</h2>
         </div>
         <div className="contact-inputs-container col-12 md:col-6">
           <Outlet context={[handleContactData]} />
         </div>
         <div className="buttons-container">
           <Button
-            label="Back"
+            label="Quay lại"
             className="back-button"
             icon="pi pi-arrow-left"
             iconPos="left"
@@ -138,7 +138,7 @@ const FirstPage = () => {
             severity="secondary"
           />
           <Button
-            label="Next"
+            label="Tiếp tục"
             className="next-button"
             icon="pi pi-arrow-right"
             iconPos="right"

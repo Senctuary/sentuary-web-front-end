@@ -1,0 +1,20 @@
+.showChatGPTBtn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: #00000059 13px 17px 20px 2px;
+    transition: all 1s ease-out;
+    animation: bounceGPT 2s infinite;
+    /* Add ease-out to make the bounce effect more realistic */
+    animation-timing-function: ease-out;
+    z-index: 111;
+}
+
+@keyframes bounceGPT {
+    0%, 100% {
+        transform: translatX(0); /* Start and end position (at the ground) */
+    }
+    50% {
+        transform: translateX(-50px); /* Peak of the bounce */
+    }
+}

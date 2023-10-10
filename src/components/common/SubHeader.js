@@ -9,11 +9,11 @@ const SubHeader = (props) => {
         className="progress-bar-container"
         style={{ display: `${props.progressBar}` }}
       >
-        <span>Shipping</span>
+        <span>Thông tin liên hệ</span>
         <i className="fa fa-chevron-right"></i>
-        <span>Delivery</span>
-        <i className="fa fa-chevron-right"></i>
-        <span>Payment</span>
+        {/* <span>TT giao hàng</span>
+        <i className="fa fa-chevron-right"></i> */}
+        <span>Thanh toán</span>
       </div>
     </div>
   );
