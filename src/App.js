@@ -19,6 +19,7 @@ import CustomizeScreen from "./components/screens/CustomizeScreen";
 import LoginScreen from "./components/screens/LoginScreen";
 import AdminDashboard from "./components/screens/AdminDashboard";
 import AddProductScreen from "./components/screens/AddProductScreen";
+import ChatGPT from "./components/customer/ChatGPT";
 
 function Header() {
   // Use useLocation inside a component function
@@ -50,7 +51,6 @@ function checkLogin() {
   }
   return true;
 }
-import ChatGPT from "./components/customer/ChatGPT";
 
 function App() {
   return (
