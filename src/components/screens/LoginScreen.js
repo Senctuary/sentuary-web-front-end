@@ -7,7 +7,9 @@ import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 
+const API_DOMAIN = process.env.REACT_APP_API_DOMAIN_LOCAL;
 const apiUrl = "https://dummyjson.com/auth/login";
+// const apiUrl = `${API_DOMAIN}api/auth/login`;
 
 const LoginScreen = () => {
   const navigate = useNavigate();
@@ -26,6 +28,7 @@ const LoginScreen = () => {
         },
         body: JSON.stringify({
           username: values.username,
+          // email: values.username,
           password: values.password,
         }),
       });
