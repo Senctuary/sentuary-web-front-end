@@ -4,54 +4,42 @@ import { InputText } from "primereact/inputtext";
 import { Button } from "primereact/button";
 import { Card } from "primereact/card";
 import { useNavigate } from "react-router-dom";
-import { Formik, Form, Field } from "formik"; 
+import { Formik, Form, Field } from "formik";
+import * as Yup from "yup";
 
-import * as Yup from "yup"; 
-const apiUrl = "https://633c28adf11701a65f705dd1.mockapi.io/admin"; 
+const apiUrl = "https://dummyjson.com/auth/login";
 
 const LoginScreen = () => {
   const navigate = useNavigate();
 
-  // Define validation schema using Yup
   const validationSchema = Yup.object().shape({
     username: Yup.string().required("Username is required"),
     password: Yup.string().required("Password is required"),
   });
 
-  // Handle form submission
-  const handleLogin = async (values, { setSubmitting, setFieldError }) => {
-
+  const handleLogin = async (values, { setSubmitting }) => {
     try {
-      const response = await fetch(`${apiUrl}`);
-  
+      const response = await fetch(apiUrl, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          username: values.username,
+          password: values.password,
+        }),
+      });
+
       if (response.ok) {
         const data = await response.json();
-          // Check if the username and password match any user in the response data
-          const userMatch = data.find(
-            (user) =>
-              user.username === values.username && user.password === values.password
-          );
-  
-          if (userMatch) {
-            // Set the JWT token in local storage
-            // const token = sign(userMatch, process.env.REACT_APP_SECRET_KEY, {
-            //   expiresIn: "1d",
-            // });
-            localStorage.setItem("jwtToken", data);
-            console.log(data.token);
-            navigate("/admin");
-          } else {
-            setFieldError("password", "Invalid username or password");
-          }
+        console.log(data);
+        localStorage.setItem("jwtToken", data.token);
+        navigate("/admin");
       } else {
-        console.error("API Error - Response Status:", response.status);
-        const responseText = await response.text();
-        console.error("API Error - Response Body:", responseText);
-        setFieldError("password", "Error fetching user data");
+        console.log("Invalid username or password");
       }
     } catch (error) {
       console.error("An error occurred:", error);
-      setFieldError("password", "An error occurred. Please try again.");
     } finally {
       setSubmitting(false);
     }
@@ -62,9 +50,7 @@ const LoginScreen = () => {
       className="login-screen p-d-flex p-jc-center p-ai-center"
       style={{ height: "100vh" }}
     >
-      <h1 style={{ marginBottom: "10rem" }}>
-        WELCOME BACK TO SENIK, ADMINNAME
-      </h1>
+      <h1 style={{ marginBottom: "10rem" }}>WELCOME BACK TO SENIK, ADMIN!</h1>
       <div className="login-form">
         <Card title="Login" style={{ width: "400px" }}>
           <Formik
