@@ -4,6 +4,7 @@ import axios from "axios";
 import AdminHeader from "../common/AdminHeader";
 import ProductCard from "../common/buttons/ProductCard";
 import { TabView, TabPanel } from "primereact/tabview";
+import { Link } from "react-router-dom";
 
 const apiUrl = "https://6520dfdb906e276284c4c0db.mockapi.io";
 
@@ -77,10 +78,27 @@ const AdminDashboard = () => {
         >
           <TabPanel header="Plants">
             <div>
-              <h1>Plants</h1>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <h1 style={{ width: "fit-content" }}>Plants</h1>
+                <button className="button"><Link to={"/admin/add-product"}>New</Link></button>
+              </div>
               <p>Current plant number: {plantQuantity}</p>
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start" }}>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+              }}
+            >
               {plants.map((plant) => {
                 return <ProductCard key={plant.id} product={plant} />;
               })}
@@ -91,7 +109,15 @@ const AdminDashboard = () => {
               <h1>Vases</h1>
               <p>Current vase number: {vaseQuantity}</p>
             </div>
-            <div style={{ display: "flex", flexWrap: "wrap", flexDirection: "row", justifyContent: "flex-start", alignItems: "flex-start" }}>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+              }}
+            >
               {vases.map((vase) => {
                 return <ProductCard key={vase.id} product={vase} />;
               })}

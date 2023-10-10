@@ -210,12 +210,14 @@
   position: fixed;
   top: 50%; /* Center vertically */
   left: 50%; /* Center horizontally */
-  transform: translate(-50%, -50%); /* Center both horizontally and vertically */
+  transform: translate(
+    -50%,
+    -50%
+  ); /* Center both horizontally and vertically */
   width: 480px;
   z-index: 1000;
   padding: 15px;
 }
-
 
 .notification-popup .x-square {
   align-items: flex-start;
@@ -258,7 +260,6 @@
   position: relative;
   width: 400px;
   height: 35px;
-  
 }
 
 .notification-popup .div-wrapper {
@@ -276,9 +277,15 @@
 
 /* PRODUCT CARD */
 .product-card {
-  width: 47.9375rem ;
+  width: 47.9375rem;
   height: 20.375rem;
-  display: flex !important; 
+  display: flex !important;
   flex-direction: row !important;
-  margin: 5rem;
+  margin: 1rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.delete-button {
+  background-color: #c1dcdc !important;
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import "../styles/Card.css";
 import { Card } from "primereact/card";
+import "font-awesome/css/font-awesome.min.css";
 
 const ProductCard = ({product}) => {
   const header = (
@@ -17,6 +18,10 @@ const ProductCard = ({product}) => {
       ₫{product.price} <br />
       Quantity: {product.quantity}
       </p>
+      <div style={{display: "flex", justifyContent: "flex-start",marginTop: "1rem"}}>
+        <button className="button">Edit</button>
+        <button className="button delete-button"><i className="fa fa-trash"/></button>
+      </div>
     </Card>
   );
 };

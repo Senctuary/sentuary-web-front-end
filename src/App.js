@@ -4,7 +4,7 @@ import {
   Routes,
   Route,
   useLocation,
-  Navigate
+  Navigate,
 } from "react-router-dom";
 
 import Navigation from "./components/common/navigation/Navigation";
@@ -18,6 +18,7 @@ import Successful from "./components/customer/checkout/Successful";
 import CustomizeScreen from "./components/screens/CustomizeScreen";
 import LoginScreen from "./components/screens/LoginScreen";
 import AdminDashboard from "./components/screens/AdminDashboard";
+import AddProductScreen from "./components/screens/AddProductScreen";
 
 function Header() {
   // Use useLocation inside a component function
@@ -25,8 +26,9 @@ function Header() {
 
   return (
     <header className="App-header">
-      {location.pathname !== "/login" && location.pathname !== "/admin" && <Navigation />}
-      
+      {location.pathname !== "/login" && location.pathname !== "/admin" && (
+        <Navigation />
+      )}
     </header>
   );
 }
@@ -57,10 +59,18 @@ function App() {
         <Header />
         <Routes>
           <Route path="/login" element={<LoginScreen />} />
+          {/* ADMIN FLOW */}
           <Route
             path="/admin"
-            element={<PrivateRoute element={<AdminDashboard />} isAuthenticated={checkLogin()} />}
+            element={
+              <PrivateRoute
+                element={<AdminDashboard />}
+                isAuthenticated={checkLogin()}
+              />
+            }
           />
+          <Route path="/admin/add-product" element={<AddProductScreen />} />
+          {/* CUSTOMER FLOW */}
           <Route path="/" element={<HomeScreen />} />
           <Route path="/customize/:id" element={<CustomizeScreen />} />
           <Route path="/checkout" element={<FirstPage />}>
