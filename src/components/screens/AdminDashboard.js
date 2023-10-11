@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./styles/AdminDashboard.css";
 import axios from "axios";
 import AdminHeader from "../common/AdminHeader";
-import ProductCard from "../common/buttons/ProductCard";
+import ProductCard from "../common/card/ProductCard";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Link } from "react-router-dom";
 
@@ -76,6 +76,7 @@ const AdminDashboard = () => {
           onTabChange={(e) => setActiveIndex(e.index)}
           orientation="left"
         >
+          {/* PLANTS */}
           <TabPanel header="Plants">
             <div>
               <div
@@ -86,7 +87,9 @@ const AdminDashboard = () => {
                 }}
               >
                 <h1 style={{ width: "fit-content" }}>Plants</h1>
-                <button className="button"><Link to={"/admin/add-product"}>New</Link></button>
+                <Link className="button" to={"/admin/add-product?type=plants"}>
+                  New
+                </Link>
               </div>
               <p>Current plant number: {plantQuantity}</p>
             </div>
@@ -104,9 +107,22 @@ const AdminDashboard = () => {
               })}
             </div>
           </TabPanel>
+
+          {/* VASES */}
           <TabPanel header="Vases">
             <div>
-              <h1>Vases</h1>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <h1 style={{ width: "fit-content" }}>Vases</h1>
+                <Link className="button" to={"/admin/add-product?type=vases"}>
+                  New
+                </Link>
+              </div>
               <p>Current vase number: {vaseQuantity}</p>
             </div>
             <div
