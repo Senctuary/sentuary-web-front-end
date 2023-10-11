@@ -13,13 +13,13 @@ import FirstPage from "./components/customer/checkout/FirstPage";
 import ContactDetail from "./components/customer/checkout/ContactDetail";
 import PaymentMethod from "./components/customer/checkout/PaymentMethod";
 import HistoryOrders from "./components/customer/HistoryOrders";
-import OrderDetail from "./components/customer/OrderDetail";
 import Successful from "./components/customer/checkout/Successful";
 import CustomizeScreen from "./components/screens/CustomizeScreen";
-import LoginScreen from "./components/screens/LoginScreen";
-import AdminDashboard from "./components/screens/AdminDashboard";
-import AddProductScreen from "./components/screens/AddProductScreen";
 import ChatGPT from "./components/customer/ChatGPT";
+import OrderDetail from "./components/admin/OrderDetail";
+import AddProductScreen from "./components/admin/AddProductScreen";
+import LoginScreen from "./components/admin/LoginScreen";
+import AdminDashboard from "./components/admin/AdminDashboard";
 
 function Header() {
   // Use useLocation inside a component function
