@@ -14,7 +14,7 @@ const PaymentMethod = () => {
   const { requestBody, totalPrice } = location.state || {};
 
   let initialValues = {
-    paymentMethodId: "",
+    paymentMethod: "",
   };
 
   let getMethods = () => {
@@ -58,7 +58,7 @@ const PaymentMethod = () => {
   const onSubmit = (values) => {
     // You can handle form submission logic here
     console.log("Form Data:", values);
-    let fullRequestBody = { ...requestBody, ...values, deliveryOptionsId: "" };
+    let fullRequestBody = { ...requestBody, ...values };
     console.log("Request Body:", fullRequestBody);
     localStorage.setItem("fullRequestBody", JSON.stringify(fullRequestBody));
   };
@@ -80,11 +80,11 @@ const PaymentMethod = () => {
                   >
                     <Field
                       type="radio"
-                      name="paymentMethodId"
+                      name="paymentMethod"
                       value={method.id}
                       onChange={() => {
                         setSelectedPaymentMethod(method.id);
-                        formik.setFieldValue("paymentMethodId", method.id);
+                        formik.setFieldValue("paymentMethod", method.id);
                         formik.submitForm();
                         if (method.name.includes("QR")) {
                           displayVietQR(totalPrice);

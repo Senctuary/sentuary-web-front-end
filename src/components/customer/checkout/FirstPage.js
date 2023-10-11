@@ -6,7 +6,7 @@ import ProductCardOrder from "../../common/productCards/productCardOrder";
 import { Button } from "primereact/button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-const API_DOMAIN = process.env.REACT_APP_API_DOMAIN;
+const API_DOMAIN = process.env.REACT_APP_API_DOMAIN_LOCAL;
 //Get the cart items from LS or API.
 // Then GET item information from API View a product detail
 
@@ -23,8 +23,9 @@ const API_DOMAIN = process.env.REACT_APP_API_DOMAIN;
 const FirstPage = () => {
   const [cartItems, setCartItems] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
-  const [productIds, setProductIds] = useState([]);
+  const [products, setproducts] = useState([]);
   const [requestBody, setRequestBody] = useState({});
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,14 +38,17 @@ const FirstPage = () => {
       const total = cartItems.reduce((accumulator, item) => {
         return accumulator + item.price * item.quantity;
       }, 0);
-      let productId = [];
+      let productsObject = [];
       cartItems.reduce((accumulator, item) => {
-        return productId.push(item.id);
+        return productsObject.push({
+          productId: item.id,
+          quantity: item.quantity,
+        });
       }, 0);
 
       setTotalPrice(total);
-      setProductIds(productId);
-      console.log(productIds);
+      setproducts(productsObject);
+      console.log(products);
     }
   }, []);
 
@@ -53,14 +57,19 @@ const FirstPage = () => {
     let currentRoute = window.location.pathname;
     console.log(currentRoute);
     if (currentRoute.includes("contact")) {
-      navigate("/checkout/payment", { state: { requestBody: requestBody, totalPrice: totalPrice } });
+      navigate("/checkout/payment", {
+        state: { requestBody: requestBody, totalPrice: totalPrice },
+      });
     } else if (currentRoute.includes("payment")) {
+      setLoading(true);
       let fullRequestBody = localStorage.getItem("fullRequestBody");
       makeOrder(fullRequestBody)
         .then(() => {
+          setLoading(false);
           navigate("/successful");
         })
         .catch((error) => {
+          setLoading(false);          
           // Handle errors here
           console.error(error);
         });
@@ -74,7 +83,7 @@ const FirstPage = () => {
   const handleContactData = (data) => {
     // Do something with the data, such as saving it to the state or performing an action.
     console.log("Contact data: ", data);
-    let tmp = { ...data, productIds };
+    let tmp = { ...data, products };
     setRequestBody(tmp);
     console.log("Half-Request body: ", requestBody);
   };
@@ -82,7 +91,11 @@ const FirstPage = () => {
   let makeOrder = (body) => {
     return new Promise((resolve, reject) => {
       axios
-        .post(`${API_DOMAIN}/order`, body)
+        .post(`${API_DOMAIN}api/orders`, body, {
+          headers: {
+            "Content-Type": "application/json", // Set the content type to JSON
+          },
+        })
         .then((response) => {
           if (response.status === 200 || response.status === 201) {
             console.log("Order was successful:", response.data);
@@ -142,7 +155,8 @@ const FirstPage = () => {
             className="next-button"
             icon="pi pi-arrow-right"
             iconPos="right"
-            onClick={navigateNext}
+            onClick={navigateNext}            
+            loading={loading}
           />
         </div>
       </div>
