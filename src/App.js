@@ -27,9 +27,9 @@ function Header() {
 
   return (
     <header className="App-header">
-      {location.pathname !== "/login" && location.pathname !== "/admin" && (
-        <Navigation />
-      )}
+      {location.pathname !== "/login" &&
+        location.pathname !== "/admin" &&
+        location.pathname !== "/admin/add-product" && <Navigation />}
     </header>
   );
 }

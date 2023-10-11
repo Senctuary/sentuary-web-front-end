@@ -289,3 +289,24 @@
 .delete-button {
   background-color: #c1dcdc !important;
 }
+
+/* ORDER STATUS AND BUTTON */
+
+.detail-button {
+  padding: 0.75rem 1.5rem;
+  background-color: #FFFFFF;
+  border: 0;
+  outline: 0;
+  border-radius: 8px;
+  width: fit-content;
+  height: fit-content;
+  font-size: 1rem;
+  font-weight: bold;
+  font-family: Popins, sans-serif;
+}
+
+.detail-button:hover {
+  background-color: #edebeb;
+  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+}
