@@ -1,0 +1,4 @@
+.chart canvas {
+    min-width: 100% !important;
+    height: auto;
+  }

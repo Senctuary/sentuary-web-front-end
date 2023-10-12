@@ -14,6 +14,7 @@
     "axios": "^1.5.1",
     "bcrypt": "^5.1.1",
     "buffer": "^6.0.3",
+    "chart.js": "^4.4.0",
     "crypto-browserify": "^3.12.0",
     "font-awesome": "^4.7.0",
     "formik": "^2.4.5",

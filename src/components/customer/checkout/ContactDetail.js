@@ -6,17 +6,23 @@ import { useOutletContext } from "react-router-dom";
 
 const ContactDetail = () => {
   const initialValues = {
-    name: "",
+    customerName: "",
+    email: "",
     phoneNumber: "",
     address: "",
+    shippedDate: "",
   };
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string().required("Full Name is required"),
+    customerName: Yup.string().required("Full Name is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
     phoneNumber: Yup.string()
       .required("Phone Number is required")
       .matches(/^\d{10}$/, "Phone Number must be 10 digits"),
     address: Yup.string().required("Address is required"),
+    shippedDate: Yup.date().required("Shipped Date is required"),
   });
 
   const [setContactDetail] = useOutletContext();
@@ -38,22 +44,48 @@ const ContactDetail = () => {
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <div className="form-group">
-              <label htmlFor="name">Họ & tên</label>
+              <label htmlFor="customerName">Họ & tên</label>
               <Field
                 type="text"
-                id="name"
-                name="name"
+                id="customerName"
+                name="customerName"
                 onBlur={() => {
                   if (
-                    formik.values.name &&
+                    formik.values.customerName &&
                     formik.values.phoneNumber &&
-                    formik.values.address
+                    formik.values.address &&
+                    formik.values.email &&
+                    formik.values.shippedDate
                   ) {
                     formik.submitForm();
                   }
                 }}
               />
-              <ErrorMessage name="name" component="div" className="error" />
+              <ErrorMessage
+                name="customerName"
+                component="div"
+                className="error"
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="email">Email</label>
+              <Field
+                type="email"
+                id="email"
+                name="email"
+                onBlur={() => {
+                  if (
+                    formik.values.customerName &&
+                    formik.values.phoneNumber &&
+                    formik.values.address &&
+                    formik.values.email &&
+                    formik.values.shippedDate
+                  ) {
+                    formik.submitForm();
+                  }
+                }}
+              />
+              <ErrorMessage name="email" component="div" className="error" />
             </div>
             <div className="form-group">
               <label htmlFor="phoneNumber">Số điện thoại</label>
@@ -63,9 +95,11 @@ const ContactDetail = () => {
                 name="phoneNumber"
                 onBlur={() => {
                   if (
-                    formik.values.name &&
+                    formik.values.customerName &&
                     formik.values.phoneNumber &&
-                    formik.values.address
+                    formik.values.address &&
+                    formik.values.email &&
+                    formik.values.shippedDate
                   ) {
                     formik.submitForm();
                   }
@@ -85,15 +119,41 @@ const ContactDetail = () => {
                 name="address"
                 onBlur={() => {
                   if (
-                    formik.values.name &&
+                    formik.values.customerName &&
                     formik.values.phoneNumber &&
-                    formik.values.address
+                    formik.values.address &&
+                    formik.values.email &&
+                    formik.values.shippedDate
                   ) {
                     formik.submitForm();
                   }
                 }}
               />
               <ErrorMessage name="address" component="div" className="error" />
+            </div>
+            <div className="form-group">
+              <label htmlFor="shippedDate">Ngày giao hàng</label>
+              <Field
+                type="date"
+                id="shippedDate"
+                name="shippedDate"
+                onBlur={() => {
+                  if (
+                    formik.values.customerName &&
+                    formik.values.phoneNumber &&
+                    formik.values.address &&
+                    formik.values.email &&
+                    formik.values.shippedDate
+                  ) {
+                    formik.submitForm();
+                  }
+                }}
+              />
+              <ErrorMessage
+                name="shippedDate"
+                component="div"
+                className="error"
+              />
             </div>
             {/* <button type="submit">Submit</button> */}
           </form>
