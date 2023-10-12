@@ -1,0 +1,45 @@
+/* custom-toast.css */
+
+/* Customize the toast message container */
+.p-toast-message {
+  border-radius: 12px;
+  background: #c1dcdc;
+  color: #fff;
+  border: none;
+}
+
+/* Customize the close icon in the toast */
+.p-toast-icon-close {
+  color: #fff; /* Change the close icon color */
+  font-size: 20px; /* Adjust the icon size */
+  width: 34px;
+  height: 35px;
+  border: solid white 2px;
+  border-radius: 4px;
+}
+
+/* Customize the title (summary) of the toast message */
+.p-toast-summary {
+  font-size: 18px; /* Adjust the font size */
+  font-size: 1.5rem;
+  color: #1e1e1e;
+}
+
+/* Customize the content (detail) of the toast message */
+.p-toast-detail {
+  margin: 3.1rem 0 0 0;
+  width: 112%;
+  padding: 12px 14px;
+  font-size: 14px; /* Adjust the font size */
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.25);
+  color: #1e1e1e;
+  font-size: 1.2rem;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+}

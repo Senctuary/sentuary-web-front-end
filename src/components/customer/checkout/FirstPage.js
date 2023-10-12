@@ -1,24 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router";
 import "./styles/FirstPage.css";
+import "./styles/CustomToast.css"
 import SubHeader from "../../common/SubHeader";
 import ProductCardOrder from "../../common/productCards/productCardOrder";
 import { Button } from "primereact/button";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-const API_DOMAIN = process.env.REACT_APP_API_DOMAIN_LOCAL;
-//Get the cart items from LS or API.
-// Then GET item information from API View a product detail
+import { Toast } from "primereact/toast";
 
-// {
-//   "cartItems": [
-//     {
-//       "id": "123e",
-//       "name": "Nike Slim Shirt",
-//       "quantity": 10,
-// }
-// ]
-// }
+const API_DOMAIN = process.env.REACT_APP_API_DOMAIN_LOCAL;
 
 const FirstPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -27,6 +18,15 @@ const FirstPage = () => {
   const [requestBody, setRequestBody] = useState({});
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const toast = useRef(null);
+
+  const showToast = (severity, summary, detail) => {
+    toast.current.show({
+      severity: severity,
+      summary: summary,
+      detail: detail,
+    });
+  };
 
   useEffect(() => {
     let cartItems = JSON.parse(localStorage.getItem("cart"));
@@ -69,7 +69,7 @@ const FirstPage = () => {
           navigate("/successful");
         })
         .catch((error) => {
-          setLoading(false);          
+          setLoading(false);
           // Handle errors here
           console.error(error);
         });
@@ -115,6 +115,7 @@ const FirstPage = () => {
 
   return (
     <div>
+      <Toast ref={toast} />
       <SubHeader title="Thêm thông tin" progressBar="inline-block" />
 
       <div className="firstpage-container grid grid-nogutter">
@@ -155,8 +156,12 @@ const FirstPage = () => {
             className="next-button"
             icon="pi pi-arrow-right"
             iconPos="right"
-            onClick={navigateNext}            
+            onClick={navigateNext}
             loading={loading}
+          />
+          <Button
+            onClick={() => showToast("info", "Test", "Message Content")}
+            label="ShowToast"
           />
         </div>
       </div>
