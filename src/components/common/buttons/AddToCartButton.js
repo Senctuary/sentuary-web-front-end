@@ -33,6 +33,15 @@ import PopupCard from "../card/PopupCard";
 const AddToCartButton = ({ product }) => {
   const [showPopup, setShowPopup] = useState(false);
 
+  const updateCartNumber = () => {
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+    const updatedCartNumber = cartItems.length;
+
+    localStorage.setItem("cartNumber", updatedCartNumber);
+
+    window.dispatchEvent(new Event("cartUpdated"));
+  };
+
   const handleButtonClick = () => {
     // setShowPopup(!showPopup);
 
@@ -47,6 +56,10 @@ const AddToCartButton = ({ product }) => {
     }
 
     localStorage.setItem("cart", JSON.stringify(cart));
+
+    updateCartNumber();
+
+    setShowPopup(!showPopup);
   };
 
   return (
