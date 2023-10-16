@@ -20,6 +20,8 @@ import OrderDetail from "./components/admin/OrderDetail";
 import AddProductScreen from "./components/admin/AddProductScreen";
 import LoginScreen from "./components/admin/LoginScreen";
 import AdminDashboard from "./components/admin/AdminDashboard";
+import ReactGA from "react-ga";
+import { useEffect } from "react";
 
 function Header() {
   // Use useLocation inside a component function
@@ -52,11 +54,21 @@ function checkLogin() {
   return true;
 }
 
+function GoogleAnalytics() {
+  const { location, pathname, search } = useLocation();
+  // if (process.env.NODE_ENV === 'production') {
+  ReactGA.initialize(process.env.REACT_APP_FIREBASE_MEASUREMENT_ID);
+  // }
+  useEffect(() => {
+    ReactGA.pageview(pathname + search);
+  }, [location]);
+}
+
 function App() {
   return (
     <Router>
       <div className="App">
-        {/* Render the Header component */}
+        <GoogleAnalytics/>
         <Header />
         <Routes>
           <Route path="/login" element={<LoginScreen />} />
@@ -84,7 +96,7 @@ function App() {
           </Route>
         </Routes>
         <footer>Footer content goes here</footer>
-        <ChatGPT/>
+        <ChatGPT />
       </div>
     </Router>
   );
