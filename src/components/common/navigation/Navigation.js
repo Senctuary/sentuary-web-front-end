@@ -3,7 +3,6 @@ import "../styles/Navigation.css";
 import "font-awesome/css/font-awesome.min.css";
 import { Link } from "react-router-dom";
 
-
 const logo = require("../../../assets/images/logo.png");
 
 const Navigation = () => {
@@ -14,12 +13,11 @@ const Navigation = () => {
   // setInterval(() => {
   //   // cartItems = JSON.parse(localStorage.getItem("cart"))?.length;
   //   // setCartNumber(cartItems);
-  //   // console.log(cartItems); 
+  //   // console.log(cartItems);
   // }, 1000);
 
   const [cartNumber, setCartNumber] = useState(0);
 
-  
   useEffect(() => {
     const cartItems = JSON.parse(localStorage.getItem("cartNumber")) || 0;
     setCartNumber(cartItems);
@@ -27,40 +25,50 @@ const Navigation = () => {
     const updateCartNumber = () => {
       const cartItems = JSON.parse(localStorage.getItem("cartNumber")) || 0;
       setCartNumber(cartItems);
-    }
+    };
 
     window.addEventListener("cartUpdated", updateCartNumber);
 
     return () => {
       window.removeEventListener("cartUpdated", updateCartNumber);
-    }
-  }, []); 
+    };
+  }, []);
 
   return (
-    <nav className="navigation">
-      <span className="left">
-        <img src={logo} alt="logo"  className="crop-logo"></img>
-      </span>
+    <div className="navigation">
+      <div className="left">
+        <img src={logo} alt="logo" className="crop-logo"></img>
+      </div>
 
-      <span className="center">
-        <Link to="/">Home</Link>
-        <Link to="/products">Products</Link>
-        <Link to="/about">About</Link>
-      </span>
+      <div className="center">
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/products">Products</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+      </div>
 
-      <span className="right">
+      <div className="right">
         <div className="profile-btn">
           <Link
             to={"/checkout/contact"}
             className="shopping-cart-btn"
-            style={{ margin: "0 10px 5px 15px" }}
+            style={{ margin: "0 10px 5px 15px", position: "relative" }}
           >
             <i className="fa fa-shopping-cart" style={{ color: "#1E1E1E" }}></i>
-            <span className="cart-number">{cartNumber}</span>
+            {cartNumber > 0 ? (
+              <span className="badge">{cartNumber}</span>
+            ) : null}
           </Link>
 
           <button className="user-btn" style={{ margin: "0 0 5px 15px" }}>
-            <i className="fa fa-user" style={{ color: "#1E1E1E" }}></i>
+            <i className="fa fa-lg fa-user" style={{ color: "#1E1E1E" }}></i>
           </button>
         </div>
         <div className="menu-btn">
@@ -68,8 +76,8 @@ const Navigation = () => {
             <i className="fa fa-bars" style={{ color: "#1E1E1E" }}></i>
           </button>
         </div>
-      </span>
-    </nav>
+      </div>
+    </div>
   );
 };
 

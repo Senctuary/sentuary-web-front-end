@@ -6,6 +6,7 @@ import { Card } from "primereact/card";
 import { useNavigate } from "react-router-dom";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
+const logo = require("../../assets/images/logo.png");
 
 const API_DOMAIN = process.env.REACT_APP_API_DOMAIN_LOCAL;
 // const apiUrl = "https://dummyjson.com/auth/login";
@@ -49,13 +50,11 @@ const LoginScreen = () => {
   };
 
   return (
-    <div
-      className="login-screen p-d-flex p-jc-center p-ai-center"
-      style={{ height: "100vh" }}
-    >
-      <h1 style={{ marginBottom: "10rem" }}>WELCOME BACK TO SENIK, ADMIN!</h1>
+    <div className="login-screen p-d-flex p-jc-center p-ai-center">
+      {/* <h1 style={{ marginBottom: "10rem" }}>Welcome</h1> */}
+      <img src={logo} alt="logo"  className="crop-logo"></img>
       <div className="login-form">
-        <Card title="Login" style={{ width: "400px" }}>
+        <Card title="Login">
           <Formik
             initialValues={{ username: "", password: "" }}
             validationSchema={validationSchema}
