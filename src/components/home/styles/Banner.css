@@ -1,11 +1,10 @@
 h1 {
   font-family: Poppins, Arial, Helvetica, sans-serif;
-  font-size: 4rem;
+  font-size: 4.3vw;
   font-style: normal;
   font-weight: 800;
   line-height: 4rem;
-  text-align: "left";
-  margin-left: "2rem";
+  margin: 0;
 }
 
 .banner-container {
@@ -19,27 +18,45 @@ h1 {
 
 .banner-container .text-element {
   width: 60%;
+  height: fit-content;
   display: flex;
   justify-content: center;
   flex-direction: column;
   font-family: "Poppins", sans-serif;
   font-weight: 400;
+  padding: 3rem 0 0 3rem;
 }
 
 .banner-container .text-element .intro-elements {
+  padding-top: 1.5rem;
   width: fit-content;
   display: flex;
-  margin: 0 0 2rem 2rem;
   justify-content: center;
   flex-direction: row;
+  align-items: center;
 }
 
 /* IMAGE SECTION */
 .image-elements {
   display: block;
   width: 40%;
+  min-height: 32rem;
+  position: relative;
 }
 
+.image-elements .banner-picture {
+  display: block;
+  position: absolute;
+  right: 4.5rem;
+  bottom: 0;
+  width: 100%;
+  height: auto;
+  max-width: 500px;
+}
+
+.search-elements {
+  padding-top: 3.34rem;
+}
 .animated-element {
   animation: bounce 2s infinite;
 }
@@ -57,5 +74,14 @@ h1 {
 @media screen and (max-width: 768px) {
   .image-elements {
     display: none;
+  }
+  h1 {
+    font-size: 4rem;
+  }
+}
+
+@media screen and (max-width: 1080px) {
+  h1 {
+    font-size: 4rem;
   }
 }

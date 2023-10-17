@@ -28,7 +28,7 @@ const ProductHighlight = () => {
   }, []);
 
   return (
-    <div className="product-highlight">
+    <div className="product-highlight" style={{maxWidth: "1280px"}}>
       <div className="product-highlight__title">
         <h2>Best Selling Plants</h2>
         <p
