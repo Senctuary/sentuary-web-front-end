@@ -1,72 +1,61 @@
-.banner {
-    width: 90%;
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: row;
-    background-color: #C1DCDC;
-    border-radius: 24px;
-}
-/* INTRODUCTION SECTION */
-.text-element {
-    width: 60%;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    font-family: 'Poppins', sans-serif;
-    font-weight: 400;
+h1 {
+  font-family: Poppins, Arial, Helvetica, sans-serif;
+  font-size: 4rem;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 4rem;
+  text-align: "left";
+  margin-left: "2rem";
 }
 
-.intro-element {
-    width: fit-content;
-    display: flex;
-    margin: 0 0 2rem 2rem;
-    justify-content: center;
-    flex-direction: row;
+.banner-container {
+  width: 90%;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  background-color: #c1dcdc;
+  border-radius: 24px;
 }
 
-/* SEARCH BAR */
-.search-element {
-    width: fit-content;
-    display: flex;
-    margin: 0 0 5rem 2rem;
-    justify-content: flex-start;
-    flex-direction: row;
-    background-color: #ffffff;
-    padding: 0.5rem;
-    border-radius: 12px;
+.banner-container .text-element {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
 }
 
-.search-bar {
-    width: 25rem;
-    height: 2rem;
-    border: 0;
-    outline: 0;
-}
-
-.search-button {
-    border: 0;
-    outline: 0;
-    background-color: #C1DCDC;
-    padding: 0.5rem 0.8rem 0.5rem 0.8rem;
-    border-radius: 12px;
+.banner-container .text-element .intro-elements {
+  width: fit-content;
+  display: flex;
+  margin: 0 0 2rem 2rem;
+  justify-content: center;
+  flex-direction: row;
 }
 
 /* IMAGE SECTION */
-.image-element {
-    display: block;
-    width: 40%;
+.image-elements {
+  display: block;
+  width: 40%;
 }
 
 .animated-element {
-    animation: bounce 2s infinite;
+  animation: bounce 2s infinite;
 }
 
 @keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-20px);
-    }
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
 }
 
+@media screen and (max-width: 768px) {
+  .image-elements {
+    display: none;
+  }
+}

@@ -82,7 +82,7 @@
 .footer .frame-3 {
   align-items: flex-start;
   display: inline-flex;
-  gap: 48px;
+  gap: 10%;
 }
 
 .footer .text-wrapper-2 {

@@ -68,12 +68,13 @@ function App() {
   return (
     <Router>
       <div className="App">
-        <GoogleAnalytics/>
+        <GoogleAnalytics />
         <Header />
-        <Routes>
-          <Route path="/login" element={<LoginScreen />} />
-          {/* ADMIN FLOW */}
-          {/* <Route
+        <div className="app-content">
+          <Routes>
+            <Route path="/login" element={<LoginScreen />} />
+            {/* ADMIN FLOW */}
+            {/* <Route
             path="/admin"
             element={
               <PrivateRoute
@@ -82,20 +83,22 @@ function App() {
               />
             }
           /> */}
-          <Route path="/admin" element={<AdminDashboard />} />
-          <Route path="/admin/add-product" element={<AddProductScreen />} />
-          {/* CUSTOMER FLOW */}
-          <Route path="/" element={<HomeScreen />} />
-          <Route path="/customize/:id" element={<CustomizeScreen />} />
-          <Route path="/checkout" element={<FirstPage />}>
-            <Route path="/checkout/contact" element={<ContactDetail />} />
-            <Route path="/checkout/payment" element={<PaymentMethod />} />
-          </Route>
-          <Route path="/successful" element={<Successful />} />
-          <Route path="/oldOrders" element={<HistoryOrders />}>
-            <Route path="/oldOrders/:id" element={<OrderDetail />} />
-          </Route>
-        </Routes>
+            <Route path="/admin" element={<AdminDashboard />} />
+            <Route path="/admin/add-product" element={<AddProductScreen />} />
+            {/* CUSTOMER FLOW */}
+            <Route path="/" element={<HomeScreen />} />
+            <Route path="/customize/:id" element={<CustomizeScreen />} />
+            <Route path="/checkout" element={<FirstPage />}>
+              <Route path="/checkout/contact" element={<ContactDetail />} />
+              <Route path="/checkout/payment" element={<PaymentMethod />} />
+            </Route>
+            <Route path="/successful" element={<Successful />} />
+            <Route path="/oldOrders" element={<HistoryOrders />}>
+              <Route path="/oldOrders/:id" element={<OrderDetail />} />
+            </Route>
+          </Routes>
+        </div>
+
         <ChatGPT />
       </div>
     </Router>
