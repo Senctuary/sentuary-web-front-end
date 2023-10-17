@@ -9,7 +9,7 @@ const Card = ({ product }) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    setImage(product.avatar);
+    setImage(product.image);
     setLoading(false);
   }, [product]);
   
@@ -26,7 +26,7 @@ const Card = ({ product }) => {
       )}
       <div className="card-body">
         <p className="card-title">{product.name}</p>
-        <p className="card-price">${product.price}</p>
+        <p className="card-price">{product.price} đ</p>
         <AddToCartButton product={product} /> {/* Ensure that you pass the product here */}
       </div>
     </div>

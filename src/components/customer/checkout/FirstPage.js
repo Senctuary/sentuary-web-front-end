@@ -9,7 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Toast } from "primereact/toast";
 
-const API_DOMAIN = process.env.REACT_APP_API_DOMAIN_LOCAL;
+const API_DOMAIN = process.env.REACT_APP_API_DOMAIN;
 
 const FirstPage = () => {
   const [cartItems, setCartItems] = useState([]);
@@ -126,7 +126,7 @@ const FirstPage = () => {
             cartItems.map((item) => {
               return (
                 <ProductCardOrder
-                  image={item.avatar}
+                  image={item.image}
                   name={item.name}
                   price={item.price}
                   quantity={item.quantity}

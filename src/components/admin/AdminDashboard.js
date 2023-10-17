@@ -9,8 +9,9 @@ import { Link } from "react-router-dom";
 import ValueGraph from "./dashboard/ValueGraph";
 import OrdersChart from "./dashboard/OrdersChart";
 
-const productAPIUrl = "https://6520dfdb906e276284c4c0db.mockapi.io";
-const orderAPIUrl = "https://6526477e917d673fd76beff8.mockapi.io";
+const API_DOMAIN = process.env.REACT_APP_API_DOMAIN;
+// const productAPIUrl = "https://6520dfdb906e276284c4c0db.mockapi.io";
+// const orderAPIUrl = "https://6526477e917d673fd76beff8.mockapi.io";
 
 const AdminDashboard = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -23,8 +24,9 @@ const AdminDashboard = () => {
 
   const getPlants = () => {
     axios
-      .get(productAPIUrl + "/plants")
+      .get(`${API_DOMAIN}api/products`)
       .then((response) => {
+        setPlantQuantity(response.data.length);
         setPlants(response.data);
       })
       .catch((error) => {
@@ -34,9 +36,10 @@ const AdminDashboard = () => {
 
   const getVases = () => {
     axios
-      .get(productAPIUrl + "/vases")
+      .get(`${API_DOMAIN}api/products`)
       .then((response) => {
         setVases(response.data);
+        setVaseQuantity(response.data.length);
       })
       .catch((error) => {
         console.log(error);
@@ -45,41 +48,13 @@ const AdminDashboard = () => {
 
   const getOrders = () => {
     axios
-      .get(orderAPIUrl + "/orders")
+      .get(`${API_DOMAIN}api/orders`, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      })
       .then((response) => {
         setOrders(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getPlantQuantity = () => {
-    axios
-      .get(productAPIUrl + "/plants")
-      .then((response) => {
-        setPlantQuantity(response.data.length);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getVaseQuantity = () => {
-    axios
-      .get(productAPIUrl + "/vases")
-      .then((response) => {
-        setVaseQuantity(response.data.length);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
-
-  const getOrderQuantity = () => {
-    axios
-      .get(orderAPIUrl + "/orders")
-      .then((response) => {
         setOrderQuantity(response.data.length);
       })
       .catch((error) => {
@@ -88,9 +63,9 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    getPlantQuantity();
-    getVaseQuantity();
-    getOrderQuantity();
+    // getPlantQuantity();
+    // getVaseQuantity();
+    // getOrderQuantity();
     getPlants();
     getVases();
     getOrders();

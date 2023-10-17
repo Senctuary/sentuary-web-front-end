@@ -19,7 +19,7 @@ const PaymentMethod = () => {
 
   let getMethods = () => {
     axios
-      .get(`${API_DOMAIN}/paymentMethods`)
+      .get(`${API_DOMAIN}api/orders/payments`)
       .then((response) => {
         if (response) {
           setPaymentMethods(response.data);
