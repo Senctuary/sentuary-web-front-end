@@ -6,8 +6,8 @@ import ProductCard from "../common/card/ProductCard";
 import OrderCard from "../common/card/OrderCard";
 import { TabView, TabPanel } from "primereact/tabview";
 import { Link } from "react-router-dom";
-import ValueGraph from "./dashboard/ValueGraph";
-import OrdersChart from "./dashboard/OrdersChart";
+// import ValueGraph from "./dashboard/ValueGraph";
+// import OrdersChart from "./dashboard/OrdersChart";
 
 const productAPIUrl = "https://6520dfdb906e276284c4c0db.mockapi.io";
 const orderAPIUrl = "https://6526477e917d673fd76beff8.mockapi.io";
@@ -109,8 +109,8 @@ const AdminDashboard = () => {
           <TabPanel header="Dashboard">
             <div>
               <h1>Dashboard</h1>
-              <ValueGraph />
-              <OrdersChart />
+              {/* <ValueGraph /> */}
+              {/* <OrdersChart /> */}
             </div>
           </TabPanel>
           {/* PLANTS */}

@@ -37,7 +37,9 @@ const Navigation = () => {
   return (
     <div className="navigation">
       <div className="left">
-        <img src={logo} alt="logo" className="crop-logo"></img>
+        <Link t0="/" className="logo">
+          <img src={logo} alt="logo" className="crop-logo"></img>
+        </Link>
       </div>
 
       <div className="center">
@@ -67,12 +69,12 @@ const Navigation = () => {
             ) : null}
           </Link>
 
-          <button className="user-btn" style={{ margin: "0 0 5px 15px" }}>
-            <i className="fa fa-lg fa-user" style={{ color: "#1E1E1E" }}></i>
+          <button className="user-btn" style={{ margin: "0" }}>
+            <i className="fa fa-2x fa-user" style={{ color: "#1E1E1E" }}></i>
           </button>
         </div>
         <div className="menu-btn">
-          <button className="bars-btn" style={{ margin: "0 0 5px 15px" }}>
+          <button className="bars-btn" style={{ margin: "0" }}>
             <i className="fa fa-bars" style={{ color: "#1E1E1E" }}></i>
           </button>
         </div>

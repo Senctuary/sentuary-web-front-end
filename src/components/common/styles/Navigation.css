@@ -17,6 +17,15 @@
   width: 100px; 
 }
 
+.logo {
+  width: fit-content;
+  height: fit-content;
+  outline: 0;
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
 .center ul {
   list-style: none;
   padding: 0;
@@ -30,10 +39,7 @@
 .center a {
   text-decoration: none;
   color: #1E1E1E;
-}
-
-.right a {
-  margin-left: 20px;
+  font-size: 18px;
 }
 
 .bars-btn, .user-btn {
@@ -59,7 +65,7 @@
   display: none;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 950px) {
   .center {
       display: none; 
   }
