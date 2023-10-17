@@ -6,26 +6,15 @@ import { Link } from "react-router-dom";
 const logo = require("../../../assets/images/logo.png");
 
 const Navigation = () => {
-  // const [cartNumber, setCartNumber] = useState(0);
-
-  // let cartItems;
-
-  // setInterval(() => {
-  //   // cartItems = JSON.parse(localStorage.getItem("cart"))?.length;
-  //   // setCartNumber(cartItems);
-  //   // console.log(cartItems);
-  // }, 1000);
-
   const [cartNumber, setCartNumber] = useState(0);
 
-  useEffect(() => {
-    const cartItems = JSON.parse(localStorage.getItem("cartNumber")) || 0;
-    setCartNumber(cartItems);
+  const updateCartNumber = () => {
+    const cartItems = JSON.parse(localStorage.getItem("cart")) || {};
+    setCartNumber(cartItems.length);
+  };
 
-    const updateCartNumber = () => {
-      const cartItems = JSON.parse(localStorage.getItem("cartNumber")) || 0;
-      setCartNumber(cartItems);
-    };
+  useEffect(() => {
+    updateCartNumber();
 
     window.addEventListener("cartUpdated", updateCartNumber);
 

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Outlet } from "react-router";
 import "./styles/FirstPage.css";
-import "./styles/CustomToast.css"
+import "./styles/CustomToast.css";
 import SubHeader from "../../common/SubHeader";
 import ProductCardOrder from "../../common/productCards/productCardOrder";
 import { Button } from "primereact/button";
@@ -113,6 +113,19 @@ const FirstPage = () => {
     });
   };
 
+  let removeItem = (id) => {
+    console.log('Removing item with id:', id);
+    let cart = JSON.parse(localStorage.getItem("cart"));
+    const existingProductIndex = cart.findIndex((item) => item.id === id);
+    if (existingProductIndex !== -1) {
+      cart.splice(existingProductIndex, 1);
+    }
+    localStorage.setItem("cart", JSON.stringify(cart));
+    setCartItems(cart);
+    // Throw an event to update the cart number in the navigation bar
+    window.dispatchEvent(new Event("cartUpdated"));
+  }
+
   return (
     <div>
       <Toast ref={toast} />
@@ -125,12 +138,17 @@ const FirstPage = () => {
           {cartItems != null ? (
             cartItems.map((item) => {
               return (
-                <ProductCardOrder
-                  image={item.image}
-                  name={item.name}
-                  price={item.price}
-                  quantity={item.quantity}
-                />
+                <div id={`card-${item.id}`} key={item.id}>
+                  <ProductCardOrder
+                    key={item.id}
+                    id={item.id}
+                    image={item.image}
+                    name={item.name}
+                    price={item.price}
+                    quantity={item.quantity}
+                    removeItem={removeItem}
+                  />
+                </div>
               );
             })
           ) : (

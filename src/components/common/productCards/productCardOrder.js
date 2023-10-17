@@ -3,6 +3,10 @@ import ExploreButton from "../buttons/ExploreButton";
 import "../styles/ProductCardOrder.css";
 
 const ProductCardOrder = (props) => {
+  const removeItem = (id) => {
+    console.log('remove item', id);
+    props.removeItem(id);
+  };
   return (
     <div class="productCardContainer">
       <img
@@ -19,6 +23,7 @@ const ProductCardOrder = (props) => {
         <div class="buttonsContainer">
           <ExploreButton displayBtn="none" title={props.title}></ExploreButton>
           <i
+            onClick={() => removeItem(props.id)}
             className="fa fa-trash"
             style={{ marginLeft: "0.5rem", color: "#1E1E1E" }}
           ></i>
