@@ -96,7 +96,6 @@ function App() {
             <Route path="/oldOrders/:id" element={<OrderDetail />} />
           </Route>
         </Routes>
-        <footer>Footer content goes here</footer>
         <ChatGPT />
       </div>
     </Router>
