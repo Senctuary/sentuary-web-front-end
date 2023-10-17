@@ -13,19 +13,19 @@ const Banner = () => {
         <h1>Get your dream plant</h1>
         <div class="intro-elements">
           <span style={{ fontSize: "18.4px" }}>
-            <p style={{ fontSize: "38.4px", margin: "0" }}>20+</p> <br></br>{" "}
+            <p style={{ fontSize: "38.4px", margin: "0" }}>20+</p> 
             Plants species
           </span>
           <div
             style={{
               margin: "0 30px",
-              width: "3px",
-              height: "100%",
+              width: "0.0625rem",
+              height: "4rem",
               backgroundColor: "#1E1E1E",
             }}
           ></div>
           <span style={{ fontSize: "18.4px" }}>
-            <p style={{ fontSize: "38.4px", margin: "0" }}>100+</p> <br></br>{" "}
+            <p style={{ fontSize: "38.4px", margin: "0" }}>100+</p> 
             Customers
           </span>
         </div>
@@ -49,7 +49,7 @@ const Banner = () => {
             alt="Animate arrow"
           />
         </div>
-        <img src={cactusHighlight} alt="Senik banner" />
+        <img className='banner-picture' src={cactusHighlight} alt="Senik banner" />
         <div class="animated-element">
           <img
             style={{ height: "100px", position: "relative", left: "-200px" }}

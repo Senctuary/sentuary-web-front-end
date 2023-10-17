@@ -5,7 +5,7 @@ import ExploreButton from '../common/buttons/ExploreButton'
 
 const Categories = () => {
   return (
-    <div className='categories'>
+    <div className='categories'  style={{maxWidth: "1280px"}}>
       <div className='categories-title'>
         <h1>Categories</h1>
         <p style={{color: "#1E1E1E80"}}>Order now and appreciate the beauty of nature</p>  

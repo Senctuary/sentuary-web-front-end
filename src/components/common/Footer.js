@@ -7,7 +7,7 @@ import shopee from "../../assets/images/shopee.svg";
 export const Footer = () => {
   return (
     <div className="footer">
-      <div className="footer-container">
+      <div className="footer-container"  style={{maxWidth: "1280px"}}>
 
         <div className="frame">
 
