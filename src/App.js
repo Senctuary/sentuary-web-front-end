@@ -61,7 +61,7 @@ function App() {
         <Routes>
           <Route path="/login" element={<LoginScreen />} />
           {/* ADMIN FLOW */}
-          <Route
+          {/* <Route
             path="/admin"
             element={
               <PrivateRoute
@@ -69,7 +69,8 @@ function App() {
                 isAuthenticated={checkLogin()}
               />
             }
-          />
+          /> */}
+          <Route path="/admin" element={<AdminDashboard />} />
           <Route path="/admin/add-product" element={<AddProductScreen />} />
           {/* CUSTOMER FLOW */}
           <Route path="/" element={<HomeScreen />} />
