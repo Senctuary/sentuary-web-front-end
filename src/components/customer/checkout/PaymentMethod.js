@@ -14,7 +14,7 @@ const PaymentMethod = () => {
   const { requestBody, totalPrice } = location.state || {};
 
   let initialValues = {
-    paymentMethod: "",
+    paymentMethod: "0",
   };
 
   let getMethods = () => {
@@ -84,7 +84,7 @@ const PaymentMethod = () => {
                       value={method.id}
                       onChange={() => {
                         setSelectedPaymentMethod(method.id);
-                        formik.setFieldValue("paymentMethod", method.id);
+                        formik.setFieldValue("paymentMethod", method.id.toString());
                         formik.submitForm();
                         if (method.name.includes("QR")) {
                           displayVietQR(totalPrice);
