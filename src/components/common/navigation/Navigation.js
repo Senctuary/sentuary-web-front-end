@@ -26,7 +26,7 @@ const Navigation = () => {
   return (
     <div className="navigation">
       <div className="left">
-        <Link t0="/" className="logo">
+        <Link to="/" className="logo">
           <img src={logo} alt="logo" className="crop-logo"></img>
         </Link>
       </div>

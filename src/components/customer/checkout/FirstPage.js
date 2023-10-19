@@ -22,9 +22,11 @@ const FirstPage = () => {
 
   const showToast = (severity, summary, detail) => {
     toast.current.show({
-      severity: severity,
+      severity: severity, //"error" | "success" | "info" | "warn"
       summary: summary,
       detail: detail,
+      closable: false,
+      life: 3000,
     });
   };
 
@@ -66,10 +68,22 @@ const FirstPage = () => {
       makeOrder(fullRequestBody)
         .then(() => {
           setLoading(false);
-          navigate("/successful");
+          showToast(
+            "success",
+            "Đặt hàng thành công",
+            "Đơn hàng của bạn đã được ghi nhận. Bạn sẽ được chuyển sang trang hoá đơn sau 3 giây."
+          );
+          setTimeout(() => {
+            navigate("/successful");
+          }, 2800);
         })
         .catch((error) => {
           setLoading(false);
+          showToast(
+            "error",
+            "Đặt hàng không thành công",
+            "Xin lỗi bạn, xin vui lòng thử lại sau giây lát."
+          );
           // Handle errors here
           console.error(error);
         });
@@ -100,6 +114,10 @@ const FirstPage = () => {
           if (response.status === 200 || response.status === 201) {
             console.log("Order was successful:", response.data);
             localStorage.removeItem("cart"); // Remove the cart from LS
+            localStorage.removeItem("fullRequestBody"); // Remove the cart from LS
+
+            // Throw an event to update the cart number in the navigation bar
+            window.dispatchEvent(new Event("cartUpdated"));
             resolve(response); // Resolve the promise for a successful order
           } else {
             console.log("Order failed with status code:", response.status);
@@ -114,7 +132,7 @@ const FirstPage = () => {
   };
 
   let removeItem = (id) => {
-    console.log('Removing item with id:', id);
+    console.log("Removing item with id:", id);
     let cart = JSON.parse(localStorage.getItem("cart"));
     const existingProductIndex = cart.findIndex((item) => item.id === id);
     if (existingProductIndex !== -1) {
@@ -124,7 +142,7 @@ const FirstPage = () => {
     setCartItems(cart);
     // Throw an event to update the cart number in the navigation bar
     window.dispatchEvent(new Event("cartUpdated"));
-  }
+  };
 
   return (
     <div>

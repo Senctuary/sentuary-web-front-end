@@ -1,0 +1,6 @@
+.products-screen-container{
+    width: 100%;
+    max-width: var(--maxwidth-screen) !important;
+    margin: 0 auto;
+    text-align: center;
+}

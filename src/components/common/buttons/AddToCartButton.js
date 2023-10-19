@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../styles/Buttons.css";
 import PopupCard from "../card/PopupCard";
+import { Button } from "primereact/button";
 
 const updateCartNumber = (product) => {
     let productInitialQuantity = 1;
@@ -28,9 +29,9 @@ const AddToCartButton = ({ product }) => {
 
   return (
     <div>
-      <button id="add-to-cart-btn" onClick={handleButtonClick}>
+      <Button id="add-to-cart-btn" onClick={handleButtonClick}>
         Add to cart
-      </button>
+      </Button>
 
       {showPopup && <PopupCard />}
     </div>

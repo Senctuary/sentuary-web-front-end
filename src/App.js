@@ -1,4 +1,5 @@
 import "./App.css";
+import './variables.css'
 import {
   BrowserRouter as Router,
   Routes,
@@ -22,6 +23,8 @@ import LoginScreen from "./components/admin/LoginScreen";
 import AdminDashboard from "./components/admin/AdminDashboard";
 import ReactGA from "react-ga";
 import { useEffect } from "react";
+import ProductScreen from "./components/screens/ProductScreen";
+import AboutUsScreen from "./components/screens/AboutUsScreen";
 
 function Header() {
   // Use useLocation inside a component function
@@ -96,6 +99,8 @@ function App() {
             <Route path="/oldOrders" element={<HistoryOrders />}>
               <Route path="/oldOrders/:id" element={<OrderDetail />} />
             </Route>
+            <Route path="/products" element={<ProductScreen/>} />
+            <Route path="/about" element={<AboutUsScreen/>} />
           </Routes>
         </div>
 

@@ -14,7 +14,7 @@ const PaymentMethod = () => {
   const { requestBody, totalPrice } = location.state || {};
 
   let initialValues = {
-    paymentMethod: "",
+    paymentMethod: "0",
   };
 
   let getMethods = () => {
@@ -49,8 +49,7 @@ const PaymentMethod = () => {
         <p className="qr-description">
           Quét mã QR bằng ứng dụng ngân hàng để thanh toán.          
         </p>
-        <p>Để xác nhận đơn hàng sau khi thanh toán:</p>
-        <p>- Quý khách vui lòng liên hệ 0365960*** để xác nhận đơn hàng.</p>
+        <p>Chúng tôi sẽ liên hệ bạn thông qua số điện thoại, email để xác nhận đơn hàng sau khi thanh toán.</p>
       </div>
       `;
   };
@@ -66,6 +65,10 @@ const PaymentMethod = () => {
   return (
     <div>
       <h2>Phương thức thanh toán:</h2>
+      <strong style={{ color: "red" }}>
+        Vì các tính năng chưa hoàn thiện, chúng tôi khuyến nghị bạn chọn phương
+        thức COD (Cash On Delivery)
+      </strong>
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
@@ -84,7 +87,10 @@ const PaymentMethod = () => {
                       value={method.id}
                       onChange={() => {
                         setSelectedPaymentMethod(method.id);
-                        formik.setFieldValue("paymentMethod", method.id);
+                        formik.setFieldValue(
+                          "paymentMethod",
+                          method.id.toString()
+                        );
                         formik.submitForm();
                         if (method.name.includes("QR")) {
                           displayVietQR(totalPrice);

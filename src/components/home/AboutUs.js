@@ -4,7 +4,7 @@ import "./styles/AboutUs.css";
 
 const AboutUs = () => {
   return (
-    <div className="about-us-container"  style={{maxWidth: "1280px"}}>
+    <div className="about-us-container">
       <div className="about-us-title">
         <h1>About us</h1>
         <p>Order now and appreciate the beauty of nature</p>
