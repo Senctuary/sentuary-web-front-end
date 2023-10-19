@@ -2,16 +2,14 @@ import React, { useEffect, useRef, useState } from "react";
 import "./styles/CustomizeScreen.css";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation } from "swiper/modules";
 import { Pagination } from "swiper/modules";
-import { register } from "swiper/element/bundle";
 import { Button } from "primereact/button";
 import { useNavigate } from "react-router-dom";
 import "swiper/css/pagination";
-import ChatGPT from "../customer/ChatGPT";
+import { updateCartNumber } from "../common/buttons/AddToCartButton";
 
-// const API_DOMAIN = process.env.REACT_APP_API_DOMAIN;
-const API_DOMAIN = "https://6520dfdb906e276284c4c0db.mockapi.io";
+const API_DOMAIN = process.env.REACT_APP_API_DOMAIN;
+// const API_DOMAIN = "https://6520dfdb906e276284c4c0db.mockapi.io";
 
 const CustomizeScreen = () => {
   const [plants, setPlants] = useState([]);
@@ -22,10 +20,13 @@ const CustomizeScreen = () => {
   let getPlants = () => {
     return new Promise((resolve, reject) => {
       axios
-        .get(`${API_DOMAIN}/plants`)
+        .get(`${API_DOMAIN}api/products`)
         .then((response) => {
           if (response) {
-            setPlants(response.data);
+            let filteredPlants = response.data.filter(
+              (plant) => !plant.category.toUpperCase().includes("VASE")
+            );
+            setPlants(filteredPlants);
             console.log(plants);
           }
         })
@@ -38,10 +39,14 @@ const CustomizeScreen = () => {
   let getVases = () => {
     return new Promise((resolve, reject) => {
       axios
-        .get(`${API_DOMAIN}/vases`)
+        .get(`${API_DOMAIN}api/products`)
         .then((response) => {
           if (response) {
-            setVases(response.data);
+            let filteredVases = response.data.filter((vase) =>
+              vase.category.toUpperCase().includes("VASE")
+            );
+
+            setVases(filteredVases);
             console.log(vases);
           }
         })
@@ -59,7 +64,38 @@ const CustomizeScreen = () => {
   const plantsSwiperRef = useRef(null);
   const vasesSwiperRef = useRef(null);
 
+  const getCurrentPlantContent = () => {
+    const activeSwiper = plantsSwiperRef.current;
+    if (!activeSwiper) {
+      return null;
+    }
+
+    const activeIndex = activeSwiper.swiper.activeIndex;
+
+    if (activeSwiper.classList.contains("plantsSwiper")) {
+      console.log(plants[activeIndex]);
+      return plants[activeIndex];
+    }
+    return null;
+  };
+  const getCurrentVaseContent = () => {
+    const activeSwiper = vasesSwiperRef.current;
+    if (!activeSwiper) {
+      return null;
+    }
+
+    const activeIndex = activeSwiper.swiper.activeIndex;
+
+    if (activeSwiper.classList.contains("vasesSwiper")) {
+      return vases[activeIndex];
+    }
+    return null;
+  };
+
   let navigateNext = () => {
+    // Add plant, vase to cart
+    updateCartNumber(getCurrentPlantContent());
+    updateCartNumber(getCurrentVaseContent());
     // Navigate to the Checkout page
     navigate("/checkout/contact");
   };
@@ -86,32 +122,6 @@ const CustomizeScreen = () => {
     },
   };
 
-  const getCurrentPlantContent = () => {
-    const activeSwiper = plantsSwiperRef.current;
-    if (!activeSwiper) {
-      return null;
-    }
-
-    const activeIndex = activeSwiper.swiper.activeIndex;
-
-    if (activeSwiper.classList.contains("plantsSwiper")) {
-      return plants[activeIndex];
-    }
-    return null;
-  };
-  const getCurrentVaseContent = () => {
-    const activeSwiper = vasesSwiperRef.current;
-    if (!activeSwiper) {
-      return null;
-    }
-
-    const activeIndex = activeSwiper.swiper.activeIndex;
-
-    if (activeSwiper.classList.contains("vasesSwiper")) {
-      return vases[activeIndex];
-    }
-    return null;
-  };
   return (
     <div className="customize-container">
       <div className="buttons-container">
