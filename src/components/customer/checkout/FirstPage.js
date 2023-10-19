@@ -78,7 +78,7 @@ const FirstPage = () => {
           }, 2800);
         })
         .catch((error) => {
-          setLoading(false); 
+          setLoading(false);
           showToast(
             "error",
             "Đặt hàng không thành công",
@@ -114,6 +114,10 @@ const FirstPage = () => {
           if (response.status === 200 || response.status === 201) {
             console.log("Order was successful:", response.data);
             localStorage.removeItem("cart"); // Remove the cart from LS
+            localStorage.removeItem("fullRequestBody"); // Remove the cart from LS
+
+            // Throw an event to update the cart number in the navigation bar
+            window.dispatchEvent(new Event("cartUpdated"));
             resolve(response); // Resolve the promise for a successful order
           } else {
             console.log("Order failed with status code:", response.status);
