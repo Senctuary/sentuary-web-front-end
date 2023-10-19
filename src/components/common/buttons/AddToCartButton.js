@@ -3,11 +3,13 @@ import "../styles/Buttons.css";
 import PopupCard from "../card/PopupCard";
 
 const updateCartNumber = (product) => {
+    let productInitialQuantity = 1;
   let cart = JSON.parse(localStorage.getItem("cart")) || [];
   const existingProductIndex = cart.findIndex((item) => item.id === product.id);
   if (existingProductIndex !== -1) {
     cart[existingProductIndex].quantity += 1;
   } else {
+      product.quantity = productInitialQuantity;
     cart.push({ ...product });
   }
 
