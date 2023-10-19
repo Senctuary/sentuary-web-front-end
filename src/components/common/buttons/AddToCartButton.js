@@ -6,6 +6,7 @@ const AddToCartButton = ({ product }) => {
   const [showPopup, setShowPopup] = useState(false);
 
   const updateCartNumber = () => {
+    let productInitialQuantity = 1;
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
     const existingProductIndex = cart.findIndex(
       (item) => item.id === product.id
@@ -13,6 +14,7 @@ const AddToCartButton = ({ product }) => {
     if (existingProductIndex !== -1) {
       cart[existingProductIndex].quantity += 1;
     } else {
+      product.quantity = productInitialQuantity;
       cart.push({ ...product });
     }
 
