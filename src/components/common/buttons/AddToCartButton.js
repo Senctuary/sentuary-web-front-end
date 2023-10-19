@@ -14,6 +14,8 @@ const updateCartNumber = (product) => {
   }
 
   localStorage.setItem("cart", JSON.stringify(cart));
+    // Throw an event to update the cart number in the navigation bar
+    window.dispatchEvent(new Event("cartUpdated"));
 };
 
 const AddToCartButton = ({ product }) => {
@@ -22,8 +24,6 @@ const AddToCartButton = ({ product }) => {
   const handleButtonClick = () => {
     updateCartNumber(product);
     setShowPopup(!showPopup);
-    // Throw an event to update the cart number in the navigation bar
-    window.dispatchEvent(new Event("cartUpdated"));
   };
 
   return (
