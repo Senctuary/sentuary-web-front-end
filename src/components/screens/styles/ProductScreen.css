@@ -1,6 +1,10 @@
-.products-screen-container{
-    width: 100%;
-    max-width: var(--maxwidth-screen) !important;
-    margin: 0 auto;
-    text-align: center;
+.products-screen-container {
+  width: 100%;
+  max-width: var(--maxwidth-screen) !important;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.products-screen-container .p-dataview .p-dataview-content .p-grid {
+  justify-content: space-evenly;
 }

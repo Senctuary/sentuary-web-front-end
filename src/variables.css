@@ -1,6 +1,6 @@
 /* variables.css */
 :root {
-    --primary-color: #c1dcdc;
+    --primary-color: #c1dcdc !important;
     --maxwidth-screen: 1280px;
     --outside-radius: 24px;
   }
