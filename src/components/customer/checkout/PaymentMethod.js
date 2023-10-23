@@ -74,7 +74,7 @@ const PaymentMethod = () => {
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <div>Vui lòng chọn phương thức:</div>
-            <div role="group" aria-labelledby="my-radio-group">
+            <div className="form-container" role="group" aria-labelledby="my-radio-group">
               {paymentMethods.map((method) => (
                 <div key={method.id}>
                   <label

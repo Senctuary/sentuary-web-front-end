@@ -1,29 +1,34 @@
 input[type="radio"] {
-    min-width: 18px !important;
-    min-height: 18px !important;
-    margin: 0 !important;
+  min-width: 18px !important;
+  min-height: 18px !important;
+  margin: 0 !important;
 }
 
 .payment-method-label {
-    display: inline-flex;
-    min-width: 200px;
-    justify-content: flex-start;
-    gap: 15px;
+  display: inline-flex;
+  min-width: 200px;
+  justify-content: flex-start;
+  gap: 15px;
 }
 
-.selected input{
-    opacity: 0;
+form .form-container {
+  display: flex;
+  padding-bottom: 2rem;
 }
 
-.selected::before{
-    content: "";
-    position: absolute;
-    /* left: 0; */
-    /* top: 50%; */
-    /* transform: translateY(-50%); */
-    width: 16px;
-    height: 16px;
-    background-color: #C1DCDC; /* Change this color to your desired choice */
-    border-radius: 50%;
-    border: solid 1px #000;
+.selected input {
+  opacity: 0;
+}
+
+.selected::before {
+  content: "";
+  position: absolute;
+  /* left: 0; */
+  /* top: 50%; */
+  /* transform: translateY(-50%); */
+  width: 16px;
+  height: 16px;
+  background-color: #c1dcdc; /* Change this color to your desired choice */
+  border-radius: 50%;
+  border: solid 1px #000;
 }
