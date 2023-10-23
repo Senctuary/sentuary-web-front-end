@@ -36,10 +36,11 @@ const PaymentMethod = () => {
   }, []);
 
   const displayVietQR = (amount) => {
+    let description = `Senik${requestBody.phoneNumber}`;
     let BANK_ID = "970422";
     let ACCOUNT_NO = "0365960823";
     let TEMPLATE = "compact";
-    let DESCRIPTION = "Senik PAYMENT";
+    let DESCRIPTION = description;
     let ACCOUNT_NAME = "NGUYEN TRUNG THONG";
     let url = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-${TEMPLATE}.png?amount=${amount}&addInfo=${DESCRIPTION}&accountName=${ACCOUNT_NAME}`;
     let qrcodeContainer = document.querySelector(".qrcode-container");
@@ -65,10 +66,10 @@ const PaymentMethod = () => {
   return (
     <div>
       <h2>Phương thức thanh toán:</h2>
-      <strong style={{ color: "red" }}>
+      {/* <strong style={{ color: "red" }}>
         Vì các tính năng chưa hoàn thiện, chúng tôi khuyến nghị bạn chọn phương
         thức COD (Cash On Delivery)
-      </strong>
+      </strong> */}
       <Formik initialValues={initialValues} onSubmit={onSubmit}>
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
