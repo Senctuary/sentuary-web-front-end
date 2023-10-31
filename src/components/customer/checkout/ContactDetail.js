@@ -3,6 +3,7 @@ import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./styles/CheckOutDetail.css";
 import { useOutletContext } from "react-router-dom";
+import { addDays } from "date-fns";
 
 const ContactDetail = () => {
   const initialValues = {
@@ -22,7 +23,17 @@ const ContactDetail = () => {
       .required("Phone Number is required")
       .matches(/^\d{10}$/, "Phone Number must be 10 digits"),
     address: Yup.string().required("Address is required"),
-    shippedDate: Yup.date().required("Shipped Date is required"),
+    shippedDate: Yup.date()
+      .required("Shipped Date is required")
+      .test("shipped-date", "Ship Date must be between 4 and 15 days from today", (value) => {
+        if (value) {
+          const current = new Date();
+          const minDate = addDays(current, 4);
+          const maxDate = addDays(current, 15);
+          return value >= minDate && value <= maxDate;
+        }
+        return true;
+      }),
   });
 
   const [setContactDetail] = useOutletContext();
