@@ -77,7 +77,11 @@ const FirstPage = () => {
           );
           setTimeout(() => {
             navigate("/successful", {
-              state: { requestBody: fullRequestBody, totalPrice: totalPrice, orderId: dt.data.id },
+              state: {
+                requestBody: fullRequestBody,
+                totalPrice: totalPrice,
+                orderId: dt.data.id,
+              },
             });
           }, 2800);
         })
@@ -177,7 +181,13 @@ const FirstPage = () => {
             <></>
           )}
 
-          <h2>Tổng giá ước tính: {totalPrice}đ</h2>
+          <h2>
+            Tổng giá ước tính:{" "}
+            {new Intl.NumberFormat("vi-VN", {
+              style: "currency",
+              currency: "VND",
+            }).format(totalPrice)}
+          </h2>
         </div>
 
         {/* Outlet container */}

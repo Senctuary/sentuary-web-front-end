@@ -70,7 +70,7 @@ const Successful = () => {
           </Button>
         </div>
       </div>
-      <div className="content-container">
+      <div className="content-container"  style={{textAlign: "center"}}>
         <h3>Chúc mừng bạn!!</h3>
         <p>
           Chúng tôi sẽ liên hệ bạn để xác nhận thông qua số điện thoại trong tối

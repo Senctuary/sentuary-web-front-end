@@ -54,7 +54,11 @@ const PaymentMethod = () => {
         {(formik) => (
           <form onSubmit={formik.handleSubmit}>
             <div>Vui lòng chọn phương thức:</div>
-            <div className="form-container" role="group" aria-labelledby="my-radio-group">
+            <div
+              className="form-container"
+              role="group"
+              aria-labelledby="my-radio-group"
+            >
               {paymentMethods.map((method) => (
                 <div key={method.id}>
                   <label
@@ -84,7 +88,12 @@ const PaymentMethod = () => {
         )}
       </Formik>
 
-      <h1>{totalPrice}</h1>
+      <h1>
+        {new Intl.NumberFormat("vi-VN", {
+          style: "currency",
+          currency: "VND",
+        }).format(totalPrice)}
+      </h1>
     </div>
   );
 };
