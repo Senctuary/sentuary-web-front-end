@@ -4,7 +4,7 @@ import "../styles/ProductCardOrder.css";
 
 const ProductCardOrder = (props) => {
   const removeItem = (id) => {
-    console.log('remove item', id);
+    console.log("remove item", id);
     props.removeItem(id);
   };
   return (
@@ -18,7 +18,12 @@ const ProductCardOrder = (props) => {
       {/* https://via.placeholder.com/183x222 */}
       <div class="informationContainer">
         <h3 class="name">{props.name}</h3>
-        <p class="price">{props.price}</p>
+        <p class="price">
+          {new Intl.NumberFormat("vi-VN", {
+            style: "currency",
+            currency: "VND",
+          }).format(props.price)}
+        </p>
         <p class="quantity">Số lượng: {props.quantity}</p>
         <div class="buttonsContainer">
           <ExploreButton displayBtn="none" title={props.title}></ExploreButton>
