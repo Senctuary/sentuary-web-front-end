@@ -63,10 +63,12 @@ const FirstPage = () => {
         state: { requestBody: requestBody, totalPrice: totalPrice },
       });
     } else if (currentRoute.includes("payment")) {
+      // After selecting payment methos at this point, the request body should be complete
       setLoading(true);
       let fullRequestBody = localStorage.getItem("fullRequestBody");
       makeOrder(fullRequestBody)
-        .then(() => {
+        .then((dt) => {
+          console.log("Payment was successful:", dt);
           setLoading(false);
           showToast(
             "success",
@@ -74,7 +76,9 @@ const FirstPage = () => {
             "Đơn hàng của bạn đã được ghi nhận. Bạn sẽ được chuyển sang trang hoá đơn sau 3 giây."
           );
           setTimeout(() => {
-            navigate("/successful");
+            navigate("/successful", {
+              state: { requestBody: fullRequestBody, totalPrice: totalPrice, orderId: dt.data.id },
+            });
           }, 2800);
         })
         .catch((error) => {
@@ -175,9 +179,13 @@ const FirstPage = () => {
 
           <h2>Tổng giá ước tính: {totalPrice}đ</h2>
         </div>
+
+        {/* Outlet container */}
         <div className="contact-inputs-container col-12 md:col-6">
           <Outlet context={[handleContactData]} />
         </div>
+
+        {/* Button container */}
         <div className="buttons-container">
           <Button
             label="Quay lại"
