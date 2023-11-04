@@ -4,7 +4,7 @@ import "font-awesome/css/font-awesome.min.css";
 import ProductCard from "../common/card/ProductCard";
 import AdminHeader from "../common/AdminHeader";
 import { useLocation } from "react-router-dom";
-const apiUrl = "https://6520dfdb906e276284c4c0db.mockapi.io";
+const apiUrl = process.env.REACT_APP_API_DOMAIN_LOCAL + "api/products";
 
 const AddProductScreen = () => {
   const location = useLocation();
@@ -18,7 +18,30 @@ const AddProductScreen = () => {
     quantity: 0,
     image: "",
     description: "",
+    status: "active",
   });
+
+  const [plantCategories] = useState([
+    {
+      id: 0,
+      name: "Cactus",
+    },
+    {
+      id: 1,
+      name: "Succulent",
+    },
+  ]);
+
+  const [status] = useState([
+    {
+      id: 0,
+      name: "Active",
+    },
+    {
+      id: 1,
+      name: "Inactive",
+    },
+  ]);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -53,19 +76,26 @@ const AddProductScreen = () => {
   };
 
   const handleSave = () => {
-    console.log(productData);
-    console.log(productType);
+    const dataToSave = {
+      ...productData,
+      price: parseFloat(productData.price),
+      quantity: parseInt(productData.quantity, 10),
+      category: parseInt(productData.category, 10),
+      status: parseInt(productData.status, 10),
+    };
     if (productType === "plants" || productType === "vases") {
-      fetch(apiUrl + `/${productType}`, {
+      const jwtToken = localStorage.getItem("jwtToken");
+      console.log(jwtToken);
+      fetch(apiUrl, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          "Authorization": "Bearer " + jwtToken,
         },
-        body: JSON.stringify(productData),
+        body: JSON.stringify(dataToSave),
       })
         .then((response) => {
-          response.json();
-          console.log(productData);
+          return response.json();
         })
         .then((data) => {
           console.log(data);
@@ -99,14 +129,19 @@ const AddProductScreen = () => {
             {/* CATEGORY */}
             <div className="form-group">
               <label htmlFor="category">Category:</label>
-              <input
-                type="text"
+              <select
                 id="category"
                 name="category"
                 value={productData.category}
-                placeholder="Product Category"
                 onChange={handleInputChange}
-              />
+              >
+                <option value="">Select a category</option>
+                {plantCategories.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* PRICE */}
@@ -134,7 +169,7 @@ const AddProductScreen = () => {
             </div>
 
             {/* DESCRIPTION */}
-            <div className="form-group" style={{width: "100%"}}>
+            <div className="form-group">
               <label htmlFor="description">Description:</label>
               <textarea
                 type="text"
@@ -143,6 +178,23 @@ const AddProductScreen = () => {
                 value={productData.description}
                 onChange={handleInputChange}
               />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="status">Status:</label>
+              <select
+                id="status"
+                name="status"
+                value={productData.status}
+                onChange={handleInputChange}
+              >
+                <option value="">Select a Status</option>
+                {status.map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.name}
+                  </option>
+                ))}
+              </select>
             </div>
 
             {/* IMAGE */}
