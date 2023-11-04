@@ -35,26 +35,6 @@ const PaymentMethod = () => {
     getMethods();
   }, []);
 
-  const displayVietQR = (amount) => {
-    let description = `Senik${requestBody.phoneNumber}`;
-    let BANK_ID = "970422";
-    let ACCOUNT_NO = "0365960823";
-    let TEMPLATE = "compact";
-    let DESCRIPTION = description;
-    let ACCOUNT_NAME = "NGUYEN TRUNG THONG";
-    let url = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-${TEMPLATE}.png?amount=${amount}&addInfo=${DESCRIPTION}&accountName=${ACCOUNT_NAME}`;
-    let qrcodeContainer = document.querySelector(".qrcode-container");
-    qrcodeContainer.innerHTML = `
-    <div className="qr-container">
-        <img src=${url} alt="VietQR" className="qr" />
-        <p className="qr-description">
-          Quét mã QR bằng ứng dụng ngân hàng để thanh toán.          
-        </p>
-        <p>Chúng tôi sẽ liên hệ bạn thông qua số điện thoại, email để xác nhận đơn hàng sau khi thanh toán.</p>
-      </div>
-      `;
-  };
-
   const onSubmit = (values) => {
     // You can handle form submission logic here
     console.log("Form Data:", values);
@@ -93,9 +73,6 @@ const PaymentMethod = () => {
                           method.id.toString()
                         );
                         formik.submitForm();
-                        if (method.name.includes("QR")) {
-                          displayVietQR(totalPrice);
-                        }
                       }}
                     />
                     {method.name}
@@ -108,7 +85,6 @@ const PaymentMethod = () => {
       </Formik>
 
       <h1>{totalPrice}</h1>
-      <div className="qrcode-container"></div>
     </div>
   );
 };
