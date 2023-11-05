@@ -16,7 +16,8 @@ const Successful = () => {
   };
 
   const displayVietQR = (amount) => {
-    let description = `Senik${orderId}`;
+    let maGiamGia = JSON.parse(requestBody).address.includes(process.env.REACT_APP_MAGIAMGIA) ? process.env.REACT_APP_MAGIAMGIA : ""
+    let description = `Senik${orderId}${maGiamGia}`;
     let BANK_ID = "970422";
     let ACCOUNT_NO = "0365960823";
     let TEMPLATE = "compact";

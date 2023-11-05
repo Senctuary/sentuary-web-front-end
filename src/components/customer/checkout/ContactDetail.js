@@ -3,7 +3,7 @@ import { Formik, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import "./styles/CheckOutDetail.css";
 import { useOutletContext } from "react-router-dom";
-import { addDays } from "date-fns";
+import { InputText } from "primereact/inputtext";
 
 const ContactDetail = () => {
   const initialDate = new Date();
@@ -22,6 +22,8 @@ const ContactDetail = () => {
     address: "",
     shippedDate: defaultDate,
   };
+
+  const [maGiamGia, setMaGiamGia] = React.useState("");
 
   const validationSchema = Yup.object().shape({
     customerName: Yup.string().required("Full Name is required"),
@@ -141,9 +143,41 @@ const ContactDetail = () => {
               />
               <ErrorMessage name="address" component="div" className="error" />
             </div>
+            {/* Mã giảm giá */}
+            <label htmlFor="magiamgia-input">Mã giảm giá</label>
+            <InputText
+              id="magiamgia-input"
+              type="text"
+              placeholder="(Có thể bỏ trống)"
+              value={maGiamGia}
+              onChange={(e) => {
+                setMaGiamGia(e.target.value);
+              }}
+              onBlur={() => {
+                let mggStatus = document.getElementById("mgg-status");
+                // add maGiamGia to the address field
+                if (
+                  maGiamGia.toUpperCase() === process.env.REACT_APP_MAGIAMGIA
+                ) {
+                  mggStatus.innerHTML = "Mã giảm giá hợp lệ";
+                  if (formik.values.address) {
+                    formik.setFieldValue(
+                      "address",
+                      maGiamGia + " - " + formik.values.address
+                    );
+                    formik.submitForm();
+                  }
+                } else {
+                  mggStatus.innerHTML =
+                    "Mã giảm giá không hợp lệ, vui lòng thử lại";
+                }
+              }}
+            />
+            <small id="mgg-status" style={{ color: "#15adb7" }}></small>
           </form>
         )}
       </Formik>
+
       <p className="estimat-time">
         Đơn hàng có thể được giao sau ngày: {day}/{month}/{year}
       </p>
