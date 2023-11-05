@@ -3,7 +3,7 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
+import { PrimeReactProvider } from "primereact/api";
 import 'primereact/resources/themes/lara-light-indigo/theme.css';   // theme
 import 'primeflex/primeflex.css';                                   // css utility
 import 'primeicons/primeicons.css';

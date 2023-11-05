@@ -5,7 +5,7 @@ import "./styles/CustomToast.css";
 import SubHeader from "../../common/SubHeader";
 import ProductCardOrder from "../../common/productCards/productCardOrder";
 import { Button } from "primereact/button";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { Toast } from "primereact/toast";
 
@@ -213,10 +213,6 @@ const FirstPage = () => {
             onClick={navigateNext}
             loading={loading}
           />
-          {/* <Button
-            onClick={() => showToast("info", "Test", "Message Content")}
-            label="ShowToast"
-          /> */}
         </div>
       </div>
     </div>
