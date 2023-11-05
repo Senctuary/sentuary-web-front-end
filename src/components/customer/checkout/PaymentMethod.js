@@ -59,30 +59,33 @@ const PaymentMethod = () => {
               role="group"
               aria-labelledby="my-radio-group"
             >
-              {paymentMethods.map((method) => (
-                <div key={method.id}>
-                  <label
-                    className={`payment-method-label ${
-                      selectedPaymentMethod === method.id ? "selected" : ""
-                    }`}
-                  >
-                    <Field
-                      type="radio"
-                      name="paymentMethod"
-                      value={method.id}
-                      onChange={() => {
-                        setSelectedPaymentMethod(method.id);
-                        formik.setFieldValue(
-                          "paymentMethod",
-                          method.id.toString()
-                        );
-                        formik.submitForm();
-                      }}
-                    />
-                    {method.name}
-                  </label>
-                </div>
-              ))}
+              {paymentMethods.map(
+                (method) =>
+                  method.name !== "ZaloPay" && (
+                    <div key={method.id}>
+                      <label
+                        className={`payment-method-label ${
+                          selectedPaymentMethod === method.id ? "selected" : ""
+                        }`}
+                      >
+                        <Field
+                          type="radio"
+                          name="paymentMethod"
+                          value={method.id}
+                          onChange={() => {
+                            setSelectedPaymentMethod(method.id);
+                            formik.setFieldValue(
+                              "paymentMethod",
+                              method.id.toString()
+                            );
+                            formik.submitForm();
+                          }}
+                        />
+                        {method.name}
+                      </label>
+                    </div>
+                  )
+              )}
             </div>
           </form>
         )}
