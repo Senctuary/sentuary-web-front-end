@@ -144,36 +144,45 @@ const ContactDetail = () => {
               <ErrorMessage name="address" component="div" className="error" />
             </div>
             {/* Mã giảm giá */}
-            <label htmlFor="magiamgia-input">Mã giảm giá</label>
-            <InputText
-              id="magiamgia-input"
-              type="text"
-              placeholder="(Có thể bỏ trống)"
-              value={maGiamGia}
-              onChange={(e) => {
-                setMaGiamGia(e.target.value);
-              }}
-              onBlur={() => {
-                let mggStatus = document.getElementById("mgg-status");
-                // add maGiamGia to the address field
-                if (
-                  maGiamGia.toUpperCase() === process.env.REACT_APP_MAGIAMGIA
-                ) {
-                  mggStatus.innerHTML = "Mã giảm giá hợp lệ";
-                  if (formik.values.address) {
-                    formik.setFieldValue(
-                      "address",
-                      maGiamGia + " - " + formik.values.address
-                    );
-                    formik.submitForm();
-                  }
-                } else {
-                  mggStatus.innerHTML =
-                    "Mã giảm giá không hợp lệ, vui lòng thử lại";
-                }
-              }}
-            />
-            <small id="mgg-status" style={{ color: "#15adb7" }}></small>
+            <div className="magiamgia-container">
+              <label htmlFor="magiamgia-input">Mã giảm giá</label>
+              <div className="input-container">
+                <InputText
+                  id="magiamgia-input"
+                  type="text"
+                  placeholder="(Có thể bỏ trống)"
+                  value={maGiamGia}
+                  onChange={(e) => {
+                    setMaGiamGia(e.target.value);
+                  }}
+                  onBlur={() => {
+                    let mggStatus = document.getElementById("mgg-status");
+                    // add maGiamGia to the address field
+                    if (
+                      maGiamGia.toUpperCase() ===
+                      process.env.REACT_APP_MAGIAMGIA
+                    ) {
+                      mggStatus.innerHTML = "Mã giảm giá hợp lệ";
+                      if (formik.values.address) {
+                        formik.setFieldValue(
+                          "address",
+                          maGiamGia + " - " + formik.values.address
+                        );
+                        formik.submitForm();
+                      }
+                    } else {
+                      mggStatus.innerHTML =
+                        "Mã giảm giá không hợp lệ, vui lòng thử lại";
+                    }
+                  }}
+                />
+                <small>
+                  <a href="" onClick={(e) => e.preventDefault()}>Kiểm tra mã</a>
+                </small>
+              </div>
+
+              <small id="mgg-status" style={{ color: "#15adb7" }}></small>
+            </div>
           </form>
         )}
       </Formik>
