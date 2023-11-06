@@ -76,8 +76,8 @@ export const Footer = () => {
           </div>
         </div>
       </div>
-      <p className="text-wrapper-4">
-        2023 all Right Reserved Term of use SENIK
+      <p className="all-right-reserve">
+        SENIK - ALL Right Reserved 2023
       </p>
     </div>
   );

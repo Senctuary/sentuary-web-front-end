@@ -33,7 +33,6 @@ const ProductHighlight = () => {
         <h2>Sản phẩm hàng đầu</h2>
         <p
           style={{
-            fontSize: "0.85rem",
             marginBottom: "1rem",
             color: "#B6B5B5",
           }}
