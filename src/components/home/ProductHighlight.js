@@ -30,7 +30,6 @@ const ProductHighlight = () => {
   return (
     <div
       className="product-highlight grid grid-nogutter"
-      style={{ maxWidth: "1280px" }}
     >
       <div className="product-highlight__title col-12  lg:col-2">
         <h2>Best Selling Plants</h2>

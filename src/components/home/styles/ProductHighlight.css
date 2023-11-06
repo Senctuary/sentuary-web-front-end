@@ -1,5 +1,6 @@
 .product-highlight {
-  width: 100%;
+  width: 90%;
+  max-width: var(--maxwidth-screen) !important;
   padding: 3rem 0;
   margin-top: 0 !important;
 }
