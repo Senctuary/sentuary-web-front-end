@@ -30,7 +30,7 @@ const AddToCartButton = ({ product }) => {
   return (
     <div>
       <Button id="add-to-cart-btn" onClick={handleButtonClick}>
-        Add to cart
+        Thêm vào giỏ
       </Button>
 
       {showPopup && <PopupCard />}

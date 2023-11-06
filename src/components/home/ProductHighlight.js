@@ -28,11 +28,9 @@ const ProductHighlight = () => {
   }, []);
 
   return (
-    <div
-      className="product-highlight grid grid-nogutter"
-    >
+    <div className="product-highlight grid grid-nogutter">
       <div className="product-highlight__title col-12  lg:col-2">
-        <h2>Best Selling Plants</h2>
+        <h2>Sản phẩm hàng đầu</h2>
         <p
           style={{
             fontSize: "0.85rem",
@@ -40,7 +38,8 @@ const ProductHighlight = () => {
             color: "#B6B5B5",
           }}
         >
-          Easiest way to healthy life by buying your favorite plants
+          Cách dễ nhất để có cuộc sống khỏe mạnh là mua những loại cây bạn yêu
+          thích
         </p>
         <SeeMoreButton />
       </div>

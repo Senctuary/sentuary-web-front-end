@@ -14,7 +14,7 @@ const SeeMoreButton = () => {
           nav("/products");
         }}
       >
-        See more
+        Xem thêm
         <i
           className="fa fa-arrow-right"
           style={{ marginLeft: "0.5rem", color: "#1E1E1E" }}

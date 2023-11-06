@@ -1,5 +1,4 @@
 h1 {
-  font-family: Poppins, Arial, Helvetica, sans-serif;
   font-size: 4.3vw;
   font-style: normal;
   font-weight: 800;
@@ -22,7 +21,6 @@ h1 {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  font-family: "Poppins", sans-serif;
   font-weight: 400;
   padding: 3rem 0 0 3rem;
 }

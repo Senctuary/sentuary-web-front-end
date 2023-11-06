@@ -1,6 +1,20 @@
 .about-us-screen-container {
-  width: 100%;
+  width: 90%;
   max-width: var(--maxwidth-screen) !important;
   margin: 0 auto;
   text-align: center;
+}
+
+.about-us-screen-container .content{
+  height: 90vh;
+}
+
+p {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }

@@ -6,23 +6,23 @@ const AboutUs = () => {
   return (
     <div className="about-us-container">
       <div className="about-us-title">
-        <h1>About us</h1>
-        <p>Order now and appreciate the beauty of nature</p>
+        <h1>Về chúng tôi</h1>
+        <p>Đặt hàng ngay và chiêm ngưỡng vẻ đẹp của thiên nhiên</p>
       </div>
       <div className="about-us">
         <AboutUsCard
-          title="Large Assortment"
-          description="we offer many different types of products with fewer variations in each category."
+          title="Đa dạng loại cây"
+          description="Chúng tôi cung cấp nhiều loại sen đá và xương rồng với đa dạng biến thể đẹp mê hồn"
           icon="pagelines"
         />
         <AboutUsCard
-          title="Fast & Free Shipping"
-          description="4-day or less delivery time, free shipping and an expedited delivery option."
+          title="Giao hàng nhanh chóng & miễn phí"
+          description="Sau ít nhất 4 ngày, tuyệt tác của tự nhiên sẽ được trên tay bạn. Luôn miễn phí trong khu vực Thủ Đức."
           icon="shopping-bag"
         />
         <AboutUsCard
-          title="24/7 Support"
-          description="answers to any business related inquiry 24/7 and in real-time."
+          title="Hỗ trợ thân thiện"
+          description="Đội ngũ nhân viên CSKH thân thiện luôn sẵn sàng hỗ trợ bạn"
           icon="phone"
         />
       </div>

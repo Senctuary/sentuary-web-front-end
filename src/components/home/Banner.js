@@ -14,11 +14,11 @@ const Banner = () => {
   return (
     <div className="banner-container">
       <div class="text-element">
-        <h1>Get your dream plant</h1>
+        <h1>Chọn cây của riêng bạn</h1>
         <div class="intro-elements">
           <span style={{ fontSize: "18.4px" }}>
             <p style={{ fontSize: "38.4px", margin: "0" }}>20+</p>
-            Plants species
+            Giống cây
           </span>
           <div
             style={{
@@ -30,7 +30,7 @@ const Banner = () => {
           ></div>
           <span style={{ fontSize: "18.4px" }}>
             <p style={{ fontSize: "38.4px", margin: "0" }}>100+</p>
-            Customers
+            Khách hàng
           </span>
         </div>
         <div class="search-elements">

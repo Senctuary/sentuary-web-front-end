@@ -6,7 +6,7 @@ const Testimonial = () => {
   return (
     <div className="testimonial"  style={{maxWidth: "1280px"}}>
       <div className="testimonial-title">
-        <h1>What customers say about 
+        <h1>Khách hàng nói gì về 
         <br></br>
         SENIK?</h1>
       </div>
