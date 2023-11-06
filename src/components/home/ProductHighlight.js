@@ -43,7 +43,7 @@ const ProductHighlight = () => {
         <SeeMoreButton />
       </div>
       <div className="product-highlight__gallery">
-        {products.map((product) => (
+        {products.slice(0, 9).map((product) => (
           <Card key={product.id} product={product} />
         ))}
       </div>

@@ -12,6 +12,7 @@ function ProductScreen() {
   const [loading, setLoading] = useState(false);
   const [categories, setCategories] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [listToDisplay, setListToDisplay] = useState([]);
 
   const fetchCategories = () => {
     fetch(`${API_DOMAIN}api/products/categories`)
@@ -44,6 +45,7 @@ function ProductScreen() {
         setLoading(false);
         console.log(productData);
         setProducts(productData);
+        setListToDisplay(productData);
       })
       .catch((error) => {
         setLoading(false);
@@ -52,14 +54,22 @@ function ProductScreen() {
   };
 
   const card = (product) => {
-    // If no category is selected, or the product's category matches the selected category, display the card.
-    if (
-      selectedCategory === "" ||
-      product.category.toUpperCase().includes(selectedCategory)
-    ) {
-      return <Card product={product}></Card>;
-    }
-    return null; // Hide the card.
+    return <Card product={product}></Card>;
+  };
+
+  const changeProductList = (category) => {
+    let tmp = [];
+    products.map((product) => {
+      if (
+        category === "" ||
+        product.category.toUpperCase().includes(category)
+      ) {
+        tmp.push(product);
+        setListToDisplay(tmp);
+      }
+      setListToDisplay(tmp);
+      return true;
+    });
   };
 
   useEffect(() => {
@@ -83,6 +93,7 @@ function ProductScreen() {
           onChange={(e) => {
             setSelectedCategory(e.value);
             console.log("Filter: ", e);
+            changeProductList(e.value);
           }}
           placeholder="All Categories"
         />
@@ -98,7 +109,12 @@ function ProductScreen() {
           <></>
         )}
 
-        <DataView value={products} itemTemplate={card} paginator rows={6} />
+        <DataView
+          value={listToDisplay}
+          itemTemplate={card}
+          paginator
+          rows={6}
+        />
       </div>
     </div>
   );
