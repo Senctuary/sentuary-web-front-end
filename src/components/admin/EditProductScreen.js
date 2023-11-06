@@ -1,26 +1,72 @@
-import React, { useState } from "react";
-import "./styles/AddProductScreen.css";
+import React, { useState, useEffect } from "react";
+import "./styles/EditProductScreen.css";
 import "font-awesome/css/font-awesome.min.css";
 import ProductCard from "../common/card/ProductCard";
 import AdminHeader from "../common/AdminHeader";
-import { useLocation } from "react-router-dom";
-const defaultImage = require("../../assets/images/succulent.jpg");
+import PopupCard from "../common/card/PopupCard";
+import { useParams } from "react-router-dom";
 const apiUrl = process.env.REACT_APP_API_DOMAIN_LOCAL + "api/products";
 
-const AddProductScreen = () => {
-  const location = useLocation();
-  const queryParams = new URLSearchParams(location.search);
-  const productType = queryParams.get("type");
 
+const EditProductScreen = () => {
+  const { productId } = useParams();
+
+  const [showPopup, setShowPopup] = useState(false);
   const [productData, setProductData] = useState({
     name: "",
     category: 0,
     price: 0,
     quantity: 0,
-    image: defaultImage,
+    image: "",
     description: "",
     status: 0,
   });
+
+  const convertCategoryType = (category) => {
+    let id = 0;
+    categories.map((item) => {
+      if (item.name === category) {
+        id = item.id;
+      }
+      return item.id;
+    });
+    return id;
+  };
+
+  const convertStatusType = (stat) => {
+    let id = 0;
+    status.map((item) => {
+      if (item.name === stat) {
+        id = item.id;
+        return item.id;
+      }
+      return item.id;
+    });
+    return id;
+  };
+
+  useEffect(() => {
+    // Fetch product data by productId and set it to productData4
+
+    const fetchProductData = async () => {
+      try {
+        const response = await fetch(apiUrl + `/${productId}`);
+        if (response.ok) {
+          const product = await response.json();
+          setProductData({
+            ...product,
+            category: convertCategoryType(product.category),
+            status: convertStatusType(product.status),
+          });
+        } else {
+          console.error("Failed to fetch product data");
+        }
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchProductData();
+  }, [productId]);
 
   const [plantCategories] = useState([
     {
@@ -30,6 +76,21 @@ const AddProductScreen = () => {
     {
       id: 1,
       name: "Succulent",
+    },
+  ]);
+
+  const [categories] = useState([
+    {
+      id: 0,
+      name: "Cactus",
+    },
+    {
+      id: 1,
+      name: "Succulent",
+    },
+    {
+      id: 2,
+      name: "Vase",
     },
   ]);
 
@@ -78,41 +139,43 @@ const AddProductScreen = () => {
 
   const handleSave = () => {
     const dataToSave = {
-      ...productData,
+      name: productData.name,
+      image: productData.image,
+      description: productData.description,
       price: parseFloat(productData.price),
       quantity: parseInt(productData.quantity, 10),
-      category: parseInt(productData.category, 10),
-      status: parseInt(productData.status, 10),
+      category: productData.category,
+      status: productData.status,
     };
-    console.log(dataToSave);
-    if (productType === "plants" || productType === "vases") {
-      const jwtToken = localStorage.getItem("jwtToken");
-      fetch(apiUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + jwtToken,
-        },
-        body: JSON.stringify(dataToSave),
+    // Send an API request to update the product
+    const jwtToken = localStorage.getItem("jwtToken");
+    fetch(apiUrl + `/${productId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + jwtToken,
+      },
+      body: JSON.stringify(dataToSave),
+    })
+      .then((response) => {
+        if (response.ok) {
+          console.log("Product updated successfully.");
+          setShowPopup(!showPopup);
+        } else {
+          console.error("Failed to update product.");
+        }
       })
-        .then((response) => {
-          return response.json();
-        })
-        .then((data) => {
-        })
-        .catch((error) => {
-          console.error(error);
-
-        });
-    }
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   return (
-    <div className="add-product">
-      <AdminHeader title="Add New Product" />
-      <div className="add-product-container">
-        <div className="add-product-form">
-          <h1>Product</h1>
+    <div className="edit-product">
+      <AdminHeader title="Edit Product" />
+      <div className="edit-product-container">
+        <div className="edit-product-form">
+          <h1>Edit Product</h1>
           <form>
             {/* NAME */}
             <div className="form-group">
@@ -128,15 +191,8 @@ const AddProductScreen = () => {
             </div>
 
             {/* CATEGORY */}
-            {productType === "vases" ? (
-              <input
-              style={{display: "none"}}
-              type="text"
-              id="category"
-              name="category"
-              value={2}
-              onChange={handleInputChange}
-              />
+            {productData.category === 2 ? (
+              <></>
             ) : (
               <div className="form-group">
                 <label htmlFor="category">Category:</label>
@@ -191,7 +247,7 @@ const AddProductScreen = () => {
                 onChange={handleInputChange}
               />
             </div>
-            
+
             {/* STATUS */}
             <div className="form-group">
               <label htmlFor="status">Status:</label>
@@ -249,7 +305,10 @@ const AddProductScreen = () => {
           <ProductCard product={productData} showButtons={true} />
         </div>
       </div>
+      
+      {showPopup && <PopupCard />}
     </div>
   );
 };
-export default AddProductScreen;
+
+export default EditProductScreen;

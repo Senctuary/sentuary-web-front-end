@@ -8,8 +8,11 @@ import { TabView, TabPanel } from "primereact/tabview";
 import { Link } from "react-router-dom";
 import ValueGraph from "./dashboard/ValueGraph";
 import OrdersChart from "./dashboard/OrdersChart";
+import { set } from "date-fns";
 
 const API_DOMAIN = process.env.REACT_APP_API_DOMAIN;
+const apiUrl = process.env.REACT_APP_API_DOMAIN_LOCAL + "api/products";
+
 // const productAPIUrl = "https://6520dfdb906e276284c4c0db.mockapi.io";
 // const orderAPIUrl = "https://6526477e917d673fd76beff8.mockapi.io";
 
@@ -18,16 +21,27 @@ const AdminDashboard = () => {
   const [plantQuantity, setPlantQuantity] = useState(0);
   const [vaseQuantity, setVaseQuantity] = useState(0);
   const [orderQuantity, setOrderQuantity] = useState(0);
+  const [deletedProductQuantity, setDeletedProductQuantity] = useState(0);
   const [plants, setPlants] = useState([]);
   const [vases, setVases] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [deletedProducts, setDeletedProducts] = useState([]);
+  const [handleDeleteProductState, setHandleDeleteProductState] = useState(false);
+  const [handleHardDeleteProductState, setHandleHardDeleteProductState] = useState(false);
 
   const getPlants = () => {
     axios
       .get(`${API_DOMAIN}api/products`)
       .then((response) => {
-        setPlantQuantity(response.data.length);
-        setPlants(response.data);
+        // console.log(response.data);
+        const plants = response.data.filter((plant) => {
+          return (
+            (plant.category === "Cactus" || plant.category === "Succulent") &&
+            plant.isDeleted === false
+          );
+        });
+        setPlants(plants);
+        setPlantQuantity(plants.length);
       })
       .catch((error) => {
         console.log(error);
@@ -38,8 +52,11 @@ const AdminDashboard = () => {
     axios
       .get(`${API_DOMAIN}api/products`)
       .then((response) => {
-        setVases(response.data);
-        setVaseQuantity(response.data.length);
+        const vases = response.data.filter((vase) => {
+          return vase.category === "Vase";
+        });
+        setVases(vases);
+        setVaseQuantity(vases.length);
       })
       .catch((error) => {
         console.log(error);
@@ -62,14 +79,88 @@ const AdminDashboard = () => {
       });
   };
 
+  const getDeletedProducts = () => {
+    axios
+      .get(`${API_DOMAIN}api/products`)
+      .then((response) => {
+        // console.log(response.data);
+        const products = response.data.filter((product) => {
+          return product.isDeleted === true;
+        });
+        setDeletedProducts(products);
+        setDeletedProductQuantity(products.length);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  const handleDeleteProduct = async (productId) => {
+    try {
+      const jwtToken = localStorage.getItem("jwtToken");
+      const response = await fetch(apiUrl + `/${productId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + jwtToken,
+        },
+      });
+      if (response.ok) {
+        console.log("Product deleted");
+        const updatedPlants = plants.map((plant) => {
+          if (plant.id === productId) {
+            return { ...plant, isDeleted: true };
+          }
+          return plant;
+        });
+  
+        const updatedVases = vases.map((vase) => {
+          if (vase.id === productId) {
+            return { ...vase, isDeleted: true };
+          }
+          return vase;
+        });
+  
+        setPlants(updatedPlants);
+        setVases(updatedVases);
+        setHandleDeleteProductState(!handleDeleteProductState);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
+  const handleHardDeleteProduct = async (productId) => {
+    try {
+      const jwtToken = localStorage.getItem("jwtToken");
+      const response = await fetch(apiUrl + `/harddelete/${productId}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + jwtToken,
+        },
+      });
+      if (response.ok) {
+        console.log("Product deleted");
+        const updatedDeletedProducts = deletedProducts.filter(
+          (deletedProduct) => {
+            return deletedProduct.id !== productId;
+          }
+        );
+        setDeletedProducts(updatedDeletedProducts);
+        setHandleHardDeleteProductState(!handleHardDeleteProductState);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  
   useEffect(() => {
-    // getPlantQuantity();
-    // getVaseQuantity();
-    // getOrderQuantity();
     getPlants();
     getVases();
     getOrders();
-  }, []);
+    getDeletedProducts();
+  }, [handleDeleteProductState, handleHardDeleteProductState]);
 
   return (
     <div className="admin-dashboard">
@@ -115,7 +206,14 @@ const AdminDashboard = () => {
               }}
             >
               {plants.map((plant) => {
-                return <ProductCard key={plant.id} product={plant} />;
+                return (
+                  <ProductCard
+                    key={plant.id}
+                    product={plant}
+                    onDelete={() => handleDeleteProduct(plant.id)}
+                    showButtons={true}
+                  />
+                );
               })}
             </div>
           </TabPanel>
@@ -147,7 +245,14 @@ const AdminDashboard = () => {
               }}
             >
               {vases.map((vase) => {
-                return <ProductCard key={vase.id} product={vase} />;
+                return (
+                  <ProductCard
+                    key={vase.id}
+                    product={vase}
+                    onDelete={() => handleDeleteProduct(vase.id)}
+                    showButtons={true}
+                  />
+                );
               })}
             </div>
           </TabPanel>
@@ -177,6 +282,44 @@ const AdminDashboard = () => {
             >
               {orders.map((orders) => {
                 return <OrderCard key={orders.id} order={orders} />;
+              })}
+            </div>
+          </TabPanel>
+
+          {/* DELETED PRODUCTS */}
+          <TabPanel header="Delete Products">
+            <div>
+              <div
+                style={{
+                  display: "flex",
+                  justifyContent: "flex-start",
+                  alignItems: "center",
+                }}
+              >
+                <h1 style={{ width: "fit-content" }}>Deleted Products</h1>
+              </div>
+              <p>Current deleted products number: {deletedProductQuantity}</p>
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexWrap: "wrap",
+                flexDirection: "row",
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+              }}
+            >
+              {deletedProducts.map((deletedProduct) => {
+                return (
+                  <ProductCard
+                    key={deletedProduct.id}
+                    product={deletedProduct}
+                    onHardDelete={() =>
+                      handleHardDeleteProduct(deletedProduct.id)
+                    }
+                    showButtons={false}
+                  />
+                );
               })}
             </div>
           </TabPanel>

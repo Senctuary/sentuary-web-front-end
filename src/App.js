@@ -25,6 +25,7 @@ import ReactGA from "react-ga";
 import { useEffect } from "react";
 import ProductScreen from "./components/screens/ProductScreen";
 import AboutUsScreen from "./components/screens/AboutUsScreen";
+import EditProductScreen from "./components/admin/EditProductScreen";
 
 function Header() {
   // Use useLocation inside a component function
@@ -34,7 +35,8 @@ function Header() {
     <header className="App-header">
       {location.pathname !== "/login" &&
         location.pathname !== "/admin" &&
-        location.pathname !== "/admin/add-product" && <Navigation />}
+        location.pathname !== "/admin/add-product" && 
+        location.pathname !== "/admin/edit-product" && <Navigation />}
     </header>
   );
 }
@@ -87,6 +89,8 @@ function App() {
             }
           />
             <Route path="/admin/add-product" element={<AddProductScreen />} />
+            <Route path="/admin/edit-product/:productId" element={<EditProductScreen />} />
+
             {/* CUSTOMER FLOW */}
             <Route path="/" element={<HomeScreen />} />
             <Route path="/customize/:id" element={<CustomizeScreen />} />
