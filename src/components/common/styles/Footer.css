@@ -107,6 +107,10 @@
   width: fit-content;
 }
 
+.all-right-reserve{
+  width: 100%;
+}
+
 @media screen and (max-width: 768px) {
   .footer {
     flex-direction: column;
