@@ -4,10 +4,10 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin-bottom: 15rem;
+    padding: 3rem 0 6rem 0;
 }
 
-.testimonial-title {
+.testimonial .testimonial-title {
     width: 100%;
     display: flex;
     justify-content: flex-start;

@@ -1,11 +1,3 @@
-h1 {
-  font-size: 4.3vw;
-  font-style: normal;
-  font-weight: 800;
-  line-height: 4rem;
-  margin: 0;
-}
-
 .banner-container {
   width: 90%;
   display: flex;
@@ -25,6 +17,13 @@ h1 {
   padding: 3rem 0 0 3rem;
 }
 
+.banner-container .text-element h1 {
+  font-size: 4.3vw !important;
+  font-style: normal;
+  font-weight: 800;
+  line-height: 4rem;
+  margin: 0;
+}
 .banner-container .text-element .intro-elements {
   padding-top: 1.5rem;
   width: fit-content;
