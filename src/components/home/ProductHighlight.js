@@ -28,8 +28,11 @@ const ProductHighlight = () => {
   }, []);
 
   return (
-    <div className="product-highlight" style={{maxWidth: "1280px"}}>
-      <div className="product-highlight__title">
+    <div
+      className="product-highlight grid grid-nogutter"
+      style={{ maxWidth: "1280px" }}
+    >
+      <div className="product-highlight__title col-12  lg:col-2">
         <h2>Best Selling Plants</h2>
         <p
           style={{
@@ -42,10 +45,17 @@ const ProductHighlight = () => {
         </p>
         <SeeMoreButton />
       </div>
-      <div className="product-highlight__gallery">
-        {products.slice(0, 9).map((product) => (
-          <Card key={product.id} product={product} />
-        ))}
+      <div className="product-highlight__gallery col-12  lg:col-10">
+        <div class="grid grid-nogutter">
+          {products.slice(0, 6).map((product) => (
+            <div
+              className="card-container col-12 md:col-6 lg:col-4"
+              key={product.id}
+            >
+              <Card product={product} />
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
