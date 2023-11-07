@@ -64,10 +64,12 @@ const AdminDashboard = () => {
   };
 
   const getOrders = () => {
+    const jwtToken = localStorage.getItem("jwtToken");
     axios
       .get(`${API_DOMAIN}api/orders`, {
         headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + jwtToken,
         },
       })
       .then((response) => {
