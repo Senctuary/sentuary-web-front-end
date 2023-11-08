@@ -6,7 +6,13 @@ import { Link } from "react-router-dom";
 
 const defaultImage = require("../../../assets/images/succulent.jpg");
 
-const ProductCard = ({ product, showButtons, onDelete, onHardDelete }) => {
+const ProductCard = ({
+  product,
+  showButtons,
+  onDelete,
+  onHardDelete,
+  hideAllButtons,
+}) => {
   const header = (
     <img
       style={{ width: "15.4375rem", height: "17.875rem", padding: "20px" }}
@@ -25,48 +31,54 @@ const ProductCard = ({ product, showButtons, onDelete, onHardDelete }) => {
         ₫{product.price} <br />
         Quantity: {product.quantity}
       </p>
-      {showButtons ? (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "flex-start",
-            marginTop: "1rem",
-          }}
-        >
-          <button className="button">
-            <Link
-              style={{ textDecoration: "none", color: "#1E1E1E" }}
-              to={`/admin/edit-product/${product.id}`}
+      {!hideAllButtons ? (
+        <div>
+          {showButtons ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "flex-start",
+                marginTop: "1rem",
+              }}
             >
-              Edit
-            </Link>
-          </button>
-          <button className="button delete-button" onClick={onDelete}>
-            <i className="fa fa-trash" />
-          </button>
+              <button className="button">
+                <Link
+                  style={{ textDecoration: "none", color: "#1E1E1E" }}
+                  to={`/admin/edit-product/${product.id}`}
+                >
+                  Edit
+                </Link>
+              </button>
+              <button className="button delete-button" onClick={onDelete}>
+                <i className="fa fa-trash" />
+              </button>
+            </div>
+          ) : (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignContent: "space-between",
+                marginTop: "1rem",
+                flexDirection: "column",
+              }}
+            >
+              <button className="button">
+                <Link
+                  style={{ textDecoration: "none", color: "#1E1E1E" }}
+                  to={`/admin/edit-product/${product.id}`}
+                >
+                  Restore
+                </Link>
+              </button>
+              <button className="button delete-button" onClick={onHardDelete}>
+                <i className="fa fa-trash" /> Permanently delete
+              </button>
+            </div>
+          )}
         </div>
       ) : (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignContent: "space-between",
-            marginTop: "1rem",
-            flexDirection: "column",  
-          }}
-        >
-          <button className="button">
-            <Link
-              style={{ textDecoration: "none", color: "#1E1E1E" }}
-              to={`/admin/edit-product/${product.id}`}
-            >
-              Restore
-            </Link>
-          </button>
-          <button className="button delete-button" onClick={onHardDelete}>
-            <i className="fa fa-trash" /> Permanently delete
-          </button>
-        </div>
+        <></>
       )}
     </Card>
   );

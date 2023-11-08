@@ -1,0 +1,36 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.order-detail-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    margin-top: 50px;
+    padding: 20px;
+    background-color: #C1DCDC;
+    border-radius: 12px;
+}
+
+.order-detail {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 50px;
+    padding: 30px;
+}
+
+.order-info {
+    padding: 10px;
+    border-right: solid 2px black;
+}
+
+.products-info {
+    padding: 10px;
+
+}
