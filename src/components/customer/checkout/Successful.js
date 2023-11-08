@@ -15,8 +15,15 @@ const Successful = () => {
     setAccepted(e.checked);
   };
 
+  const maGiamGias = process.env.REACT_APP_MAGIAMGIA.split(", ");
+
   const displayVietQR = (amount) => {
-    let maGiamGia = JSON.parse(requestBody).address.includes(process.env.REACT_APP_MAGIAMGIA) ? process.env.REACT_APP_MAGIAMGIA : ""
+    let maGiamGia = "";
+    maGiamGias.map((mgg) => {
+      if (JSON.parse(requestBody).address.includes(mgg)) {
+        maGiamGia = mgg;
+      }
+    });
     let description = `Senik${orderId}${maGiamGia}`;
     let BANK_ID = "970422";
     let ACCOUNT_NO = "0365960823";
@@ -52,7 +59,7 @@ const Successful = () => {
   return (
     <div className="successful-container">
       <SubHeader title="Bạn đã đặt hàng thành công" progressBar="none" />
-      <div className="qrcode-container" style={{textAlign: "center"}}>
+      <div className="qrcode-container" style={{ textAlign: "center" }}>
         <div className="qr-container"></div>
         <div className="checkbox-term-container">
           <div style={{ display: "flex", justifyContent: "center" }}>
@@ -71,7 +78,7 @@ const Successful = () => {
           </Button>
         </div>
       </div>
-      <div className="content-container"  style={{textAlign: "center"}}>
+      <div className="content-container" style={{ textAlign: "center" }}>
         <h3>Chúc mừng bạn!!</h3>
         <p>
           Chúng tôi sẽ liên hệ bạn để xác nhận thông qua số điện thoại trong tối
