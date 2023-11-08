@@ -15,6 +15,7 @@ const ContactDetail = () => {
 
   const defaultDate = `${year}-${month}-${day}`;
 
+  const maGiamGias = process.env.REACT_APP_MAGIAMGIA.split(", ");
   const initialValues = {
     customerName: "",
     email: "",
@@ -159,8 +160,7 @@ const ContactDetail = () => {
                     let mggStatus = document.getElementById("mgg-status");
                     // add maGiamGia to the address field
                     if (
-                      maGiamGia.toUpperCase() ===
-                      process.env.REACT_APP_MAGIAMGIA
+                      maGiamGias.includes(maGiamGia.toUpperCase())
                     ) {
                       mggStatus.innerHTML = "Mã giảm giá hợp lệ";
                       if (formik.values.address) {
