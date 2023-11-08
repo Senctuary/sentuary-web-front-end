@@ -1,8 +1,23 @@
-.content-container{
-    display: flex;
-    flex-direction: column;
-    gap: 4px;
-    align-items: center;
-    justify-content: center;
-    height: 80vh;
+.successful-container .content-container {
+  display: flex !important;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+}
+
+.content-container .order-detail-content-container {
+  margin: 1rem;
+  max-width: 720px;
+  text-align: start;
+  border-radius: 14px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  background-color: rgb(241, 238, 234);
+}
+
+.content-container .order-detail-content-container .order-id {
+  background-color: yellow;
+  font-weight: bold;
 }
