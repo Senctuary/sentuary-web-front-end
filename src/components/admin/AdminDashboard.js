@@ -214,6 +214,7 @@ const AdminDashboard = () => {
                     product={plant}
                     onDelete={() => handleDeleteProduct(plant.id)}
                     showButtons={true}
+                    hideAllButtons={false}
                   />
                 );
               })}
@@ -283,7 +284,7 @@ const AdminDashboard = () => {
               }}
             >
               {orders.map((orders) => {
-                return <OrderCard key={orders.id} order={orders} />;
+                return <OrderCard key={orders.id} order={orders} showButton={true}/>;
               })}
             </div>
           </TabPanel>

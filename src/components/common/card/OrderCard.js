@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "../styles/Card.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const apiUrl = process.env.REACT_APP_API_DOMAIN_LOCAL + "api/orders";
 
-const OrderDetailCard = ({ order }) => {
+const OrderDetailCard = ({ order, showButton }) => {
+  const nav = useNavigate();
   const [options] = useState([
     {
       id: 0,
@@ -100,6 +101,14 @@ const OrderDetailCard = ({ order }) => {
     return formattedDate;
   };
 
+  const handleOnClick = () => {
+    nav("/admin/order-detail", {
+      state: {
+        order: order,
+      },
+    });
+  };
+
   return (
     <div
       style={{
@@ -170,11 +179,15 @@ const OrderDetailCard = ({ order }) => {
             ))}
           </select>
         </div>
-        <div>
-          <Link className="detail-button" to={"/admin/order-detail"}>
-            Detail
-          </Link>
-        </div>
+        {showButton ? (
+          <div>
+            <button className="detail-button" onClick={handleOnClick}>
+              Detail
+            </button>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

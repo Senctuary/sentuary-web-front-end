@@ -1,0 +1,18 @@
+.order-detail {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    background-color: #C1DCDC;
+    margin: 50px;
+    padding: 30px;
+}
+
+.order-info {
+    padding: 10px;
+    border-right: solid 2px black;
+}
+
+.products-info {
+    padding: 10px;
+
+}

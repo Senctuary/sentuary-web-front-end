@@ -36,7 +36,8 @@ function Header() {
       {location.pathname !== "/login" &&
         location.pathname !== "/admin" &&
         location.pathname !== "/admin/add-product" && 
-        location.pathname !== "/admin/edit-product" && <Navigation />}
+        location.pathname !== "/admin/edit-product" && 
+        location.pathname !== "/admin/order-detail" && <Navigation />}
     </header>
   );
 }
@@ -90,7 +91,7 @@ function App() {
           />
             <Route path="/admin/add-product" element={<AddProductScreen />} />
             <Route path="/admin/edit-product/:productId" element={<EditProductScreen />} />
-
+            <Route path="/admin/order-detail" element={<OrderDetail />} />
             {/* CUSTOMER FLOW */}
             <Route path="/" element={<HomeScreen />} />
             <Route path="/customize/:id" element={<CustomizeScreen />} />
