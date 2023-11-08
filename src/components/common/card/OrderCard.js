@@ -5,6 +5,7 @@ const apiUrl = process.env.REACT_APP_API_DOMAIN_LOCAL + "api/orders";
 
 const OrderDetailCard = ({ order, showButton }) => {
   const nav = useNavigate();
+  console.log(order.id + ": " + order.status);
   const [options] = useState([
     {
       id: 0,
@@ -28,6 +29,8 @@ const OrderDetailCard = ({ order, showButton }) => {
     },
   ]);
 
+  const [updatedOrder, setUpdatedOrder] = useState(order);
+
   const convertStatusType = (stat) => {
     let id = 0;
     options.map((item) => {
@@ -39,22 +42,39 @@ const OrderDetailCard = ({ order, showButton }) => {
     return id;
   };
 
-  const [orderStatus, setOrderStatus] = useState(0);
-
   const handleSelectChange = (e) => {
-    // console.log("STATUS: " + e.target.value);
     const id = e.target.value;
-    setOrderStatus(id);
-    // console.log("CHANGED STATUS: " + orderStatus);
-    // updateOrderStatus(order.id);
+    updateOrderStatus(order.id, id);
   };
 
-  const updateOrderStatus = async (orderId) => {
+  const getOrder = async () => {
+    try {
+      const jwtToken = localStorage.getItem("jwtToken");
+      const response = await fetch(apiUrl + `/${order.id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${jwtToken}`,
+        },
+      });
+      if (response.ok) {
+        const order = await response.json();
+        console.log(order);
+        setUpdatedOrder(order);
+      } else {
+        console.log("Error getting order");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  const updateOrderStatus = async (orderId, statusId) => {
     const dataToSave = [
       {
         op: "replace",
         path: "/status",
-        value: orderStatus,
+        value: statusId,
       },
     ];
     const jwtToken = localStorage.getItem("jwtToken");
@@ -68,10 +88,8 @@ const OrderDetailCard = ({ order, showButton }) => {
     })
       .then((response) => {
         if (response.ok) {
-          // console.log("Product updated successfully.");
-          setOrderStatus(orderStatus);
-          // console.log(dataToSave);
-          // console.log(response);
+          console.log("Product updated successfully.");
+          getOrder();
         } else {
           console.error("Failed to update product.");
         }
@@ -80,14 +98,6 @@ const OrderDetailCard = ({ order, showButton }) => {
         console.error(error);
       });
   };
-
-  useEffect(() => {
-    updateOrderStatus(order.id);
-  }, [order.id]);
-
-  useEffect(() => {
-    updateOrderStatus(order.id);
-  }, [order.id, orderStatus]);
 
   const timeConverter = (timeString) => {
     const date = new Date(timeString);
@@ -104,7 +114,7 @@ const OrderDetailCard = ({ order, showButton }) => {
   const handleOnClick = () => {
     nav("/admin/order-detail", {
       state: {
-        order: order,
+        order: updatedOrder,
       },
     });
   };
@@ -120,35 +130,32 @@ const OrderDetailCard = ({ order, showButton }) => {
     >
       <div className="order-information">
         <p>
-          Order ID: <strong>{order.id}</strong>
+          Order ID: <strong>{updatedOrder.id}</strong>
         </p>
         <p>
-          Customer name: <strong>{order.customerName}</strong>
+          Customer name: <strong>{updatedOrder.customerName}</strong>
         </p>
         <p>
-          Total price: <strong>{order.totalMoney} VND</strong>
+          Total price: <strong>{updatedOrder.totalMoney} VND</strong>
         </p>
         <p>
-          Total quantity: <strong>{order.totalQuantity}</strong>
+          Total quantity: <strong>{updatedOrder.totalQuantity}</strong>
         </p>
         <p>
-          Phone: <strong>{order.phoneNumber}</strong>
+          Phone: <strong>{updatedOrder.phoneNumber}</strong>
         </p>
         <p>
-          Email: <strong>{order.email}</strong>
+          Email: <strong>{updatedOrder.email}</strong>
         </p>
         <p>
-          Address: <strong>{order.address}</strong>
+          Address: <strong>{updatedOrder.address}</strong>
         </p>
         <p>
-          Ship date: <strong>{timeConverter(order.shippedDate)}</strong>
+          Ship date: <strong>{timeConverter(updatedOrder.shippedDate)}</strong>
         </p>
         <p>
-          Payment method: <strong>{order.paymentMethod}</strong>
+          Payment method: <strong>{updatedOrder.paymentMethod}</strong>
         </p>
-        {/* <p>
-          Status: <strong>{orderStatus}</strong>
-        </p> */}
       </div>
       <div
         className="order-action"
@@ -169,14 +176,19 @@ const OrderDetailCard = ({ order, showButton }) => {
             id="item"
             name="item"
             style={{ marginLeft: "10px" }}
-            value={orderStatus}
+            value={convertStatusType(updatedOrder.status)}
             onChange={handleSelectChange}
           >
-            {options.map((status) => (
-              <option key={status.id} value={status.id}>
-                {status.name}
-              </option>
-            ))}
+            <option value="">{order.status}</option>
+            {(options
+              .filter((item) => {
+                return item.id !== convertStatusType(order.status);
+              }))
+              .map((status) => (
+                <option key={status.id} value={status.id}>
+                  {status.name}
+                </option>
+              ))}
           </select>
         </div>
         {showButton ? (
