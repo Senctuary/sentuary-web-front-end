@@ -73,8 +73,11 @@ const AdminDashboard = () => {
         },
       })
       .then((response) => {
-        setOrders(response.data);
-        setOrderQuantity(response.data.length);
+        const orderList = response.data.filter((order) => {
+          return order.isDeleted === false
+        });
+        setOrders(orderList);
+        setOrderQuantity(orderList.length);
       })
       .catch((error) => {
         console.log(error);
@@ -196,7 +199,7 @@ const AdminDashboard = () => {
                   New
                 </Link>
               </div>
-              <p>Current plant number: {plantQuantity}</p>
+              <p>Current plant amount: {plantQuantity}</p>
             </div>
             <div
               style={{
@@ -236,7 +239,7 @@ const AdminDashboard = () => {
                   New
                 </Link>
               </div>
-              <p>Current vase number: {vaseQuantity}</p>
+              <p>Current vase amount: {vaseQuantity}</p>
             </div>
             <div
               style={{
@@ -272,7 +275,7 @@ const AdminDashboard = () => {
               >
                 <h1 style={{ width: "fit-content" }}>Orders</h1>
               </div>
-              <p>Current vase number: {orderQuantity}</p>
+              <p>Current order amount: {orderQuantity}</p>
             </div>
             <div
               style={{
